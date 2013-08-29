@@ -39,6 +39,7 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 <script src="js/libs/jquery.easing.1.3.min.js"></script>
 <script src="js/libs/jquery.fitvids.js"></script>
 <script src="js/script.js"></script>
+
 <script src="js/quotation.js"></script>
 <script src="js/twitter.js"></script>
 
@@ -89,7 +90,7 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 	  					<a id="tweet" href="https://twitter.com" target="_blank"><img src="https://dev.twitter.com/sites/default/files/images_documentation/bird_black_16_0.png" alt="Tweet" /></a>
 					</span>
 					<span style="float: right;">
-	  					<a onclick="randomQuotation()"><img id="refresh" src="images/refresh.gif" alt="Refresh" /></a>
+	  					<a onclick="randomQuotation()"><img id="refresh" src="images/refresh16x16.png" alt="Refresh" /></a>
 					</span>
 				</div>
 				
@@ -100,17 +101,30 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 						<div class="projectNavButtons"><button class="prev"></button><button class="next"></button></div>
 					</div>
 					<ul id="details">
+						<li id="author" hidden="hidden">
+							<strong><span id="author_name"></span></strong>&nbsp;<span id="notable_for" hidden="hidden"></span>
+						</li>
 						<li id="summary">
+							<div>
 							<figure class="displayed">
 								<img class="displayed" id="image"/>
-   								<figcaption style="text-align: center; margin:5px;"><strong id="name"></strong></figcaption>
 							</figure>
-							<span id="description"></span>
+							<span id="description" hidden="hidden"></span>
+							</div>
+						</li>
+						<li id="birth" hidden="hidden">
+							<strong>Born: </strong><span id="birth_date"></span>&nbsp;<span id="birth_place" hidden="hidden"></span>
+						</li>
+						<li id="death" hidden="hidden">
+							<strong>Died: </strong><span id="death_date"></span>&nbsp;<span id="death_place" hidden="hidden"></span>
+						</li>
+						<li id="website" hidden="hidden">
+							<strong>Web Site: </strong><a id="website_url" href="" target="_blank"></a>
 						</li>
 					</ul>
 					<ul>
 						<li style="text-align: right">
-							<img src="http://www.gstatic.com/freebase/img/freebase-cc-by-61x23.png"alt="Freebase Creative Commons" />
+							<a id="freebase_url" href="http://freebase.com" target="_blank"><img src="http://www.gstatic.com/freebase/img/freebase-cc-by-61x23.png"alt="Freebase Creative Commons" /></a>
 						</li>
 					</ul>
 				</div>
@@ -141,28 +155,31 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 			that have influenced and molded our language and culture.
 			</p>
 			<p>
-			Features:
-			</p>
-			
+			<h4>Features:</h4>
 			<ul class="disc">
 				<li>Two app widgets for the desktop.</li>
-				<li>A short description of the auther and a link to Wikipedia.</li>
+				<li>A short description of the author and a link to Wikipedia.</li>
 				<li>Share the quotation by Twitter, Facebook, or email</li>
 			</ul>
+			</p>
+		
+			<div>
+				<img src="images/mobile/app-3.png" alt="application"  width="200" />
+				<img src="images/mobile/app-2.png" alt="application"  width="200" />
+			</div>
+			<div>
+				<img src="images/mobile/app-4.png" alt="application"  width="400" />
+			</div>
 		</div>
 		<!-- Column 1 ends ====================================================================== -->
 		
 		<!-- Column 2 begins ==================================================================== -->
 		<div class="eight columns">
 			
-			<img src="images/mobile/ldpi thoreau.png" alt="About" />
+			<img src="images/mobile/app-widget-1.png" alt="widget" />
 			
 		</div>
 		<!-- Column 2 ends ====================================================================== -->
-		
-		<div class="sixteen columns">
-			<img src="images/mobile/nook eisenhower.png" alt="About" />
-		</div>
 	</div>
 	<!-- About page ends ======================================================================== -->
 	
