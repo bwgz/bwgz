@@ -35,13 +35,16 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 <!-- JS
 ================================================================================================= -->
 <script src="js/libs/modernizr.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="js/libs/jquery.easing.1.3.min.js"></script>
 <script src="js/libs/jquery.fitvids.js"></script>
 <script src="js/script.js"></script>
 
 <script src="js/quotation.js"></script>
 <script src="js/twitter.js"></script>
+
+<link href="jsImgSlider/1/js-image-slider.css" rel="stylesheet" type="text/css" />
+<script src="jsImgSlider/1/js-image-slider.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -148,7 +151,7 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 		<!-- Column 1 begins ==================================================================== -->
 		<div class="eight columns">
 			
-			<h3>Quotation Mobile for Android Devices</h3>
+			<h3>Quotation for Android&trade;</h3>
 			<p>
 			Quotation brings you over 35000 random quotes from thousands of authors. Quotation showcases
 			quotes from ancient times to present day. They are a stunning representation of those words
@@ -161,22 +164,39 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 				<li>A short description of the author and a link to Wikipedia.</li>
 				<li>Share the quotation by Twitter, Facebook, or email</li>
 			</ul>
+			<p>
+				Quotation for Android is available for free at 
+				<a href="https://play.google.com/store/apps/details?id=org.bwgz.quotation">
+				Google Play
+				</a>
+				.
 			</p>
-		
-			<div>
-				<img src="images/mobile/app-3.png" alt="application"  width="200" />
-				<img src="images/mobile/app-2.png" alt="application"  width="200" />
-			</div>
-			<div>
-				<img src="images/mobile/app-4.png" alt="application"  width="400" />
-			</div>
+			<p>
+				<a href="https://play.google.com/store/apps/details?id=org.bwgz.quotation">
+				  <img alt="Android app on Google Play"
+				       src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+				</a>
+			</p>
 		</div>
 		<!-- Column 1 ends ====================================================================== -->
 		
 		<!-- Column 2 begins ==================================================================== -->
 		<div class="eight columns">
 			
-			<img src="images/mobile/app-widget-1.png" alt="widget" />
+		    <div id="sliderFrame">
+		        <div id="slider">
+		            <img src="images/mobile/app-widget-1.png"/>
+		            <img src="images/mobile/app-1.png"/>
+		            <img src="images/mobile/app-2.png"/>
+		            <img src="images/mobile/app-4.png"/>
+		            <img src="images/mobile/app-5.png"/>
+		            <img src="images/mobile/app-6.png"/>
+		            <img src="images/mobile/app-7.png"/>
+		            <img src="images/mobile/app-8.png"/>
+		            <img src="images/mobile/app-9.png"/>
+		            <img src="images/mobile/app-10.png"/>
+		        </div>
+			</div>
 			
 		</div>
 		<!-- Column 2 ends ====================================================================== -->
@@ -188,7 +208,8 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 		<hr />
 		<div style="text-align: center" id="footerLinks">
 			<ul  style="text-align: center">
-				<li>&copy; 2013 bwg.org. All rights reserved.</li>
+				<li>&copy; 2013 <a href="http://www.bwgz.org" target="_blank">bwgz.org</a>. All rights reserved.</li>
+				<li>Android is a trademark of Google Inc.</li>
 				<li>Powered by <a href="http://www.typeandgrids.com" target="_blank">Type &amp; Grids</a></li>
 			</ul>
 		</div>
