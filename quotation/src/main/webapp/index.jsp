@@ -1,4 +1,7 @@
 <!doctype html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="l10n.string" var="msg" />
+
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -18,9 +21,9 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 
 <!-- CSS
 ================================================================================================= -->
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/themes/type_04.css">
-<link rel="stylesheet" href="css/themes/color_01.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/themes/type_04.css">
+<link rel="stylesheet" href="/css/themes/color_01.css">
 
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -28,30 +31,34 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 
 <!-- Favicons
 ================================================================================================= -->
-<link rel="shortcut icon" type="image/png" href="images/favicons/quotation16x16bw.png">
-<link rel="apple-touch-icon" href="images/favicons/quotation48x48bw.png">
-<link rel="apple-touch-icon" sizes="72x72" href="images/favicons/quotation72x72bw.png">
+<link rel="shortcut icon" type="image/png" href="/images/favicons/quotation16x16bw.png">
+<link rel="apple-touch-icon" href="/images/favicons/quotation48x48bw.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/quotation72x72bw.png">
 
 <!-- JS
 ================================================================================================= -->
-<script src="js/libs/modernizr.min.js"></script>
+<script src="/js/libs/modernizr.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="js/libs/jquery.easing.1.3.min.js"></script>
-<script src="js/libs/jquery.fitvids.js"></script>
-<script src="js/script.js"></script>
+<script src="/js/libs/jquery.easing.1.3.min.js"></script>
+<script src="/js/libs/jquery.fitvids.js"></script>
+<script src="/js/script.js"></script>
 
-<script src="js/quotation.js"></script>
-<script src="js/twitter.js"></script>
+<script src="/js/libs/globalize.js"></script>
+<script src="/js/libs/cultures/globalize.cultures.js"></script>
 
-<link href="jsImgSlider/1/js-image-slider.css" rel="stylesheet" type="text/css" />
-<script src="jsImgSlider/1/js-image-slider.js" type="text/javascript"></script>
+<script src="/js/quotation.js"></script>
+<script src="/js/twitter.js"></script>
+
+<link href="/jsImgSlider/1/js-image-slider.css" rel="stylesheet" type="text/css" />
+<script src="/jsImgSlider/1/js-image-slider.js" type="text/javascript"></script>
 
 </head>
 <body>
 
 <!-- Write preloader to page - this allows the site to load for users with JS disabled -->
 <script type="text/javascript">
-	document.write("<div id='sitePreloader'><div id='preloaderImage'><img src='images/site_preloader.gif' alt='Preloader' /></div></div>");
+	document.write("<div id='sitePreloader'><div id='preloaderImage'><img src='/images/site_preloader.gif' alt='Preloader' /></div></div>");
+	language=<%= "\"" + request.getLocale().toString() + "\"" %>;
 </script>
 <div class="container">
 	
@@ -66,8 +73,8 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 		</div>
 		<nav>
 			<ul>
-				<li><button id="workPage">Home</button></li>
-				<li><button id="aboutPage">Mobile</button></li>
+				<li><button id="workPage"><fmt:message key="home" bundle="${msg}"/></button></li>
+				<li><button id="aboutPage"><fmt:message key="mobile" bundle="${msg}"/></button></li>
 			</ul>
 		</nav>
 		<hr />
@@ -93,36 +100,44 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 	  					<a id="tweet" href="https://twitter.com" target="_blank"><img src="https://dev.twitter.com/sites/default/files/images_documentation/bird_black_16_0.png" alt="Tweet" /></a>
 					</span>
 					<span style="float: right;">
-	  					<a onclick="randomQuotation()"><img id="refresh" src="images/refresh16x16.png" alt="Refresh" /></a>
+	  					<a onclick="randomQuotation()"><img id="refresh" src="/images/refresh16x16.png" alt="Refresh" /></a>
 					</span>
 				</div>
 				
 				<div class="projectInfo">
 					<div class="projectNavCounter"></div>
 					<div class="projectNav">
-						<div class="projectNavClose"><button class="closeButton">Close</button></div>
+						<div class="projectNavClose"><button class="closeButton"><fmt:message key="close" bundle="${msg}"/></button></div>
 						<div class="projectNavButtons"><button class="prev"></button><button class="next"></button></div>
 					</div>
-					<ul id="details">
-						<li id="author" hidden="hidden">
-							<strong><span id="author_name"></span></strong>&nbsp;<span id="notable_for" hidden="hidden"></span>
+					<ul id="quotation_details">
+						<li id="author_name_li">
+							<strong><span id="author_name"></span></strong>&nbsp;<span id="author_notable_for" hidden="hidden"></span>
 						</li>
-						<li id="summary">
+						<li id="quotation_description" hidden="hidden">
+						</li>
+						<li id="quotation_spoken_by_character_li" hidden="hidden">
+							<strong><fmt:message key="spoken_by_character" bundle="${msg}"/>: </strong><span id="quotation_spoken_by_character"></span>
+						</li>
+						<li id="quotation_source_li" hidden="hidden">
+							<strong><fmt:message key="source" bundle="${msg}"/>: </strong><span id="quotation_source"></span>
+						</li>
+						<li id="author_summary_li">
 							<div>
 							<figure class="displayed">
 								<img class="displayed" id="image"/>
 							</figure>
-							<span id="description" hidden="hidden"></span>
+							<span id="author_description" hidden="hidden"></span>
 							</div>
 						</li>
-						<li id="birth" hidden="hidden">
-							<strong>Born: </strong><span id="birth_date"></span>&nbsp;<span id="birth_place" hidden="hidden"></span>
+						<li id="author_birth_li" hidden="hidden">
+							<strong><fmt:message key="born" bundle="${msg}"/>: </strong><span id="birth_date"></span>&nbsp;<span id="birth_place" hidden="hidden"></span>
 						</li>
-						<li id="death" hidden="hidden">
-							<strong>Died: </strong><span id="death_date"></span>&nbsp;<span id="death_place" hidden="hidden"></span>
+						<li id="author_death_li" hidden="hidden">
+							<strong><fmt:message key="died" bundle="${msg}"/>: </strong><span id="death_date"></span>&nbsp;<span id="death_place" hidden="hidden"></span>
 						</li>
-						<li id="website" hidden="hidden">
-							<strong>Web Site: </strong><a id="website_url" href="" target="_blank"></a>
+						<li id="author_website_li" hidden="hidden">
+							<strong><fmt:message key="website" bundle="${msg}"/>: </strong><a id="author_website_url" href="" target="_blank"></a>
 						</li>
 					</ul>
 					<ul>
@@ -185,16 +200,16 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 			
 		    <div id="sliderFrame">
 		        <div id="slider">
-		            <img src="images/mobile/app-widget-1.png"/>
-		            <img src="images/mobile/app-1.png"/>
-		            <img src="images/mobile/app-2.png"/>
-		            <img src="images/mobile/app-4.png"/>
-		            <img src="images/mobile/app-5.png"/>
-		            <img src="images/mobile/app-6.png"/>
-		            <img src="images/mobile/app-7.png"/>
-		            <img src="images/mobile/app-8.png"/>
-		            <img src="images/mobile/app-9.png"/>
-		            <img src="images/mobile/app-10.png"/>
+		            <img src="/images/mobile/app-widget-1.png"/>
+		            <img src="/images/mobile/app-1.png"/>
+		            <img src="/images/mobile/app-2.png"/>
+		            <img src="/images/mobile/app-4.png"/>
+		            <img src="/images/mobile/app-5.png"/>
+		            <img src="/images/mobile/app-6.png"/>
+		            <img src="/images/mobile/app-7.png"/>
+		            <img src="/images/mobile/app-8.png"/>
+		            <img src="/images/mobile/app-9.png"/>
+		            <img src="/images/mobile/app-10.png"/>
 		        </div>
 			</div>
 			
