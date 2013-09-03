@@ -8,8 +8,7 @@
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 
 <style type="text/css">
-figure.displayed {border: 1px solid; border-color: #dddddd; float: left; margin-right:5px;}
-img.displayed {display: block; margin-left: auto; margin-right: auto }
+img.displayed {display: block; float: left; margin-right:5px; }
 </style>
 <head>
 <meta charset="utf-8">
@@ -123,12 +122,8 @@ img.displayed {display: block; margin-left: auto; margin-right: auto }
 							<strong><fmt:message key="source" bundle="${msg}"/>: </strong><span id="quotation_source"></span>
 						</li>
 						<li id="author_summary_li">
-							<div>
-							<figure class="displayed">
-								<img class="displayed" id="image"/>
-							</figure>
+							<img class="displayed" id="author_image" hidden="hidden"/>
 							<span id="author_description" hidden="hidden"></span>
-							</div>
 						</li>
 						<li id="author_birth_li" hidden="hidden">
 							<strong><fmt:message key="born" bundle="${msg}"/>: </strong><span id="birth_date"></span>&nbsp;<span id="birth_place" hidden="hidden"></span>
