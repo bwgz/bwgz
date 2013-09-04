@@ -11,7 +11,6 @@
 img.displayed {display: block; float: left; margin-right:5px; }
 </style>
 <head>
-<meta charset="utf-8">
 
 <title>Quotation</title>
 <meta name="description" content="Random quotations.">
@@ -45,6 +44,8 @@ img.displayed {display: block; float: left; margin-right:5px; }
 <script src="/js/libs/globalize.js"></script>
 <script src="/js/libs/cultures/globalize.cultures.js"></script>
 
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
 <script src="/js/quotation.js"></script>
 <script src="/js/twitter.js"></script>
 
@@ -57,7 +58,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 <!-- Write preloader to page - this allows the site to load for users with JS disabled -->
 <script type="text/javascript">
 	document.write("<div id='sitePreloader'><div id='preloaderImage'><img src='/images/site_preloader.gif' alt='Preloader' /></div></div>");
-	language=<%= "\"" + request.getLocale().toString() + "\"" %>;
+	var language=<%= "\"" + request.getLocale().toString() + "\"" %>;
 </script>
 <div class="container">
 	
@@ -93,7 +94,6 @@ img.displayed {display: block; float: left; margin-right:5px; }
  						</h3>
 					</blockquote>
 				</div>
-				
 				<div>
 					<span style="float: left;">
 	  					<a id="tweet" href="https://twitter.com" target="_blank"><img src="https://dev.twitter.com/sites/default/files/images_documentation/bird_black_16_0.png" alt="Tweet" /></a>
@@ -103,7 +103,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 					</span>
 				</div>
 				
-				<div class="projectInfo">
+				<div class="projectInfo" style="width: 100%">
 					<div class="projectNavCounter"></div>
 					<div class="projectNav">
 						<div class="projectNavClose"><button class="closeButton"><fmt:message key="close" bundle="${msg}"/></button></div>
