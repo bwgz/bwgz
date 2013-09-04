@@ -373,7 +373,7 @@ function randomQuotation() {
 	$("#refresh").attr("src", "/images/spinner_e3e3e3.gif");
 
 	var location = window.location;
-	var query = location.href + "quotation/random/mid?nocache=" + new Date().getTime();
+	var query = location.href + "quotation/random/mid";
 	// console.debug("random quotation: " + query);
 	$.getJSON(query, {}).done(function(data) {
 		var mid = data.mid;
