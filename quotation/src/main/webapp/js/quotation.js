@@ -1,3 +1,7 @@
+function getApiKey() {
+	return 'AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw';
+}
+
 function getProperty(data, property) {
 	return (data.property != null) ? data.property[property] : null;
 }
@@ -67,11 +71,12 @@ function parseDate(input) {
 }
 
 function handleLocation(parent_id, id, mid, name) {
-	var query = "https://www.googleapis.com/freebase/v1/topic" + mid + "?lang=" + language + "&key=AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw&filter=/location/location/geolocation&callback=?";
-	// console.debug("location: " + query);
-	$.getJSON(query, {})
-	.done(function(data) {
-		value = getPropertyValueByIndex(data, '/location/location/geolocation', 0);
+    var request = gapi.client.request({
+    	'path': '/freebase/v1/topic' + mid,
+    	'params': { "lang": language, "filter": "/location/location/geolocation" }
+    	});
+	request.execute(function(result) {
+		value = getPropertyValueByIndex(result, '/location/location/geolocation', 0);
 		if (value != null) {
 			var property = value.property;
 
@@ -102,16 +107,16 @@ function handleLocation(parent_id, id, mid, name) {
 				});
 			}
 		}
-	}).error(function(jqXHR, textStatus, errorThrown) {
     });
 }
 
 function handleAuthor(mid) {
-	var query = "https://www.googleapis.com/freebase/v1/topic" + mid + "?lang=" + language + "&key=AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw&filter=/type/object/name&filter=/people/person/date_of_birth&filter=/people/person/place_of_birth&filter=/people/deceased_person/date_of_death&filter=/people/deceased_person/place_of_death&filter=/common/topic/description&filter=/common/topic/notable_for&filter=/common/topic/official_website&filter=/people/person/quotations&filter=/location/location/geolocation&filter=/common/topic/image&callback=?" ;
-	// console.debug(" author: " + query);
-	$.getJSON(query, {})
-	.done(function(data) {
-		var value = getNotableFor(data);
+    var request = gapi.client.request({
+    	'path': '/freebase/v1/topic' + mid,
+    	'params': { "lang": language }
+    	});
+	request.execute(function(result) {
+		var value = getNotableFor(result);
 		if (value == null) {
 			$("#author_notable_for").hide();
 		}
@@ -120,7 +125,7 @@ function handleAuthor(mid) {
 			$("#author_notable_for").show();
 		}
 		
-		value = getPropertyValueByIndex(data, '/common/topic/description', 0);
+		value = getPropertyValueByIndex(result, '/common/topic/description', 0);
 		if (value == null) {
 			$("#author_description").hide();
 		}
@@ -135,7 +140,7 @@ function handleAuthor(mid) {
 			$("#author_summary_li").show();
 		}
 		
-		if (getPropertyValues(data, '/common/topic/image') == null) {
+		if (getPropertyValues(result, '/common/topic/image') == null) {
 			$("#author_image").removeAttr("src"); 
 			$("#author_image").attr("style", "display:none;");    
 			$("#author_image").hide();
@@ -147,7 +152,7 @@ function handleAuthor(mid) {
 		}
 		
 		hide = true;
-		value = getPropertyValueByIndex(data, '/people/person/date_of_birth', 0);
+		value = getPropertyValueByIndex(result, '/people/person/date_of_birth', 0);
 		if (value == null) {
 			$("#birth_date").hide();    
 		}
@@ -157,7 +162,7 @@ function handleAuthor(mid) {
 			hide = false;
 		}
 		
-		value = getPropertyValueByIndex(data, '/people/person/place_of_birth', 0);
+		value = getPropertyValueByIndex(result, '/people/person/place_of_birth', 0);
 		if (value == null) {
 			$("#birth_place").hide();    
 		}
@@ -177,7 +182,7 @@ function handleAuthor(mid) {
 		}
 		
 		hide = true;
-		value = getPropertyValueByIndex(data, '/people/deceased_person/date_of_death', 0);
+		value = getPropertyValueByIndex(result, '/people/deceased_person/date_of_death', 0);
 		if (value == null) {
 			$("#death_date").hide();    
 		}
@@ -187,7 +192,7 @@ function handleAuthor(mid) {
 			hide = false;
 		}
 		
-		value = getPropertyValueByIndex(data, '/people/deceased_person/place_of_death', 0);
+		value = getPropertyValueByIndex(result, '/people/deceased_person/place_of_death', 0);
 		if (value == null) {
 			$("#death_place").hide();    
 		}
@@ -206,7 +211,7 @@ function handleAuthor(mid) {
 			$("#author_death_li").show();
 		}
 
-		value = getPropertyValueByIndex(data, '/common/topic/official_website', 0);
+		value = getPropertyValueByIndex(result, '/common/topic/official_website', 0);
 		if (value == null) {
 			$("#author_website_li").hide();
 		}
@@ -284,17 +289,18 @@ function handleSource(source) {
 		$("#quotation_source_li").hide();    
 	}
 	else {
-		var query = "https://www.googleapis.com/freebase/v1/topic" + source.id + "?lang=" + language + "&key=AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw&callback=?";
-		// console.debug("source: " + query);
-		$.getJSON(query, {})
-		.done(function(data) {
+	    var request = gapi.client.request({
+	    	'path': '/freebase/v1/topic' + source.id,
+	    	'params': { "lang": language }
+	    	});
+		request.execute(function(result) {
 			var string = null;
 			
-			if (getPropertyValueById(data, '/type/object/type', "/tv/tv_series_episode") != null) {
-				string = getTvSeriesEpisode(data);
+			if (getPropertyValueById(result, '/type/object/type', "/tv/tv_series_episode") != null) {
+				string = getTvSeriesEpisode(result);
 			}
 			else {
-				string = getGenericSource(data);
+				string = getGenericSource(result);
 			}
 				
 			if (string == null) {
@@ -304,18 +310,20 @@ function handleSource(source) {
 				$("#quotation_source").text(string);
 				$("#quotation_source_li").show();
 			}
-		}).error(function(jqXHR, textStatus, errorThrown) {
 	    });
 	}
 }
 
 function handleQuotation(mid) {
+	$("#refresh").attr("src", "/images/spinner_e3e3e3.gif");
 	$("#freebase_url").attr("href", "http://freebase.com" + mid);
-	var query = "https://www.googleapis.com/freebase/v1/topic" + mid + "?lang=" + language + "&key=AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw&callback=?";
-	// console.debug("quotation: " + query);
-	$.getJSON(query, {})
-	.done(function(data) {
-		var value = getPropertyValueByIndex(data, '/type/object/name', 0);
+    var request = gapi.client.request({
+    	'path': '/freebase/v1/topic' + mid,
+    	'params': { "lang": language }
+    	});
+	request.execute(function(result) {
+    	
+		var value = getPropertyValueByIndex(result, '/type/object/name', 0);
 		if (value == null) {
 			$("#quotation").text("");
 			$("#tweet").attr("href", "https://twitter.com/intent/tweet");
@@ -326,7 +334,7 @@ function handleQuotation(mid) {
 
 			$("#quotation").text(quotation);
 			
-			value = getPropertyValueByIndex(data, '/common/topic/description', 0);
+			value = getPropertyValueByIndex(result, '/common/topic/description', 0);
 			if (value == null) {
 				$("#quotation_description").hide();    
 			}
@@ -335,7 +343,7 @@ function handleQuotation(mid) {
 				$("#quotation_description").show();
 			}
 			
-			value = getPropertyValueByIndex(data, '/media_common/quotation/spoken_by_character', 0);
+			value = getPropertyValueByIndex(result, '/media_common/quotation/spoken_by_character', 0);
 			if (value == null) {
 				$("#quotation_spoken_by_character_li").hide();    
 			}
@@ -344,9 +352,9 @@ function handleQuotation(mid) {
 				$("#quotation_spoken_by_character_li").show();
 			}
 			
-			handleSource(getPropertyValueByIndex(data, '/media_common/quotation/source', 0));
+			handleSource(getPropertyValueByIndex(result, '/media_common/quotation/source', 0));
 				
-			value = getPropertyValueByIndex(data, '/media_common/quotation/author', 0);
+			value = getPropertyValueByIndex(result, '/media_common/quotation/author', 0);
 			if (value == null) {
 				$("#author_name_li").hide();
 				$("#author_summary_li").hide();
@@ -365,9 +373,9 @@ function handleQuotation(mid) {
 			
 			$("#tweet").attr("href", "https://twitter.com/intent/tweet?text=" + tweet);
 		}
-	}).error(function(jqXHR, textStatus, errorThrown) {
-    });
-}
+   	});
+	}
+
 
 function randomQuotation() {
 	$("#refresh").attr("src", "/images/spinner_e3e3e3.gif");
@@ -391,3 +399,7 @@ function randomQuotation() {
 $(document).ready(function() {
 	randomQuotation();
 });
+
+function onLoadGoogleClient() {
+    gapi.client.setApiKey(getApiKey());
+}

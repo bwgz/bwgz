@@ -36,7 +36,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 <!-- JS
 ================================================================================================= -->
 <script src="/js/libs/modernizr.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="/js/libs/jquery.easing.1.3.min.js"></script>
 <script src="/js/libs/jquery.fitvids.js"></script>
 <script src="/js/script.js"></script>
@@ -44,7 +44,8 @@ img.displayed {display: block; float: left; margin-right:5px; }
 <script src="/js/libs/globalize.js"></script>
 <script src="/js/libs/cultures/globalize.cultures.js"></script>
 
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="//apis.google.com/js/client.js?onload=onLoadGoogleClient"></script>
+<script src="//maps.google.com/maps/api/js?key=AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw&sensor=false"></script>
 
 <script src="/js/quotation.js"></script>
 <script src="/js/twitter.js"></script>
