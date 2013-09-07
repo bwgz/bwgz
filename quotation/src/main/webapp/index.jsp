@@ -20,10 +20,11 @@ img.displayed {display: block; float: left; margin-right:5px; }
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="quotation_mid" content="">
 <meta name="author_mid" content="">
+<meta property="og:type" content="website" />
 <meta property="og:url" content="http://quotation.bwgz.org" />
 <meta property="og:title" content="Quotation" />
 <meta property="og:description" content="Quotation brings you over 35000 random quotes from thousands of authors. Quotation showcases quotes from ancient times to present day. They are a stunning representation of those words that have influenced and molded our language and culture." />
-<meta property="og:image" content="http://quotation.bwgz.org/images/favicons/quotation512x512.png" />
+<meta property="og:image" content="http://quotation.bwgz.org/images/tiles/tile-256x256.png" />
 
 <!-- CSS
 ================================================================================================= -->
