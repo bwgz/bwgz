@@ -1,5 +1,6 @@
 <!doctype html>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page contentType="text/html;charset=UTF-8"%>
 <fmt:setBundle basename="l10n.string" var="msg" />
 
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
@@ -11,11 +12,12 @@
 img.displayed {display: block; float: left; margin-right:5px; }
 </style>
 <head>
-
 <title>Quotation</title>
 <meta name="description" content="Random quotations.">
 <meta name="author" content="bwgz.org">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="quotation_mid" content="">
+<meta name="author_mid" content="">
 
 <!-- CSS
 ================================================================================================= -->
@@ -41,14 +43,12 @@ img.displayed {display: block; float: left; margin-right:5px; }
 <script src="/js/libs/jquery.fitvids.js"></script>
 <script src="/js/script.js"></script>
 
-<script src="/js/libs/globalize.js"></script>
-<script src="/js/libs/cultures/globalize.cultures.js"></script>
+<script src="/js/date.js"></script>
+<script src="/js/quotation.js"></script>
+<script src="/js/twitter.js"></script>
 
 <script src="//apis.google.com/js/client.js?onload=onLoadGoogleClient"></script>
 <script src="//maps.google.com/maps/api/js?key=AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw&sensor=false"></script>
-
-<script src="/js/quotation.js"></script>
-<script src="/js/twitter.js"></script>
 
 <link href="/jsImgSlider/1/js-image-slider.css" rel="stylesheet" type="text/css" />
 <script src="/jsImgSlider/1/js-image-slider.js" type="text/javascript"></script>
@@ -59,7 +59,8 @@ img.displayed {display: block; float: left; margin-right:5px; }
 <!-- Write preloader to page - this allows the site to load for users with JS disabled -->
 <script type="text/javascript">
 	document.write("<div id='sitePreloader'><div id='preloaderImage'><img src='/images/site_preloader.gif' alt='Preloader' /></div></div>");
-	var language=<%= "\"" + request.getLocale().toString() + "\"" %>;
+	var locale=<%= "\"" + request.getLocale().toString() + "\"" %>;
+	var localeDatePattern=<%= "\"" + ((java.text.SimpleDateFormat) java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, request.getLocale())).toPattern() + "\"" %>.replace("yy", "yyyy");
 </script>
 <div class="container">
 	
@@ -97,10 +98,10 @@ img.displayed {display: block; float: left; margin-right:5px; }
 				</div>
 				<div>
 					<span style="float: left;">
-	  					<a id="tweet" href="https://twitter.com" target="_blank"><img src="https://dev.twitter.com/sites/default/files/images_documentation/bird_black_16_0.png" alt="Tweet" /></a>
+	  					<a id="twitter_link" href="https://twitter.com" target="_blank"><img src="https://dev.twitter.com/sites/default/files/images_documentation/bird_black_16_0.png" alt="Tweet" /></a>
 					</span>
 					<span style="float: right;">
-	  					<a onclick="randomQuotation()"><img id="refresh" src="/images/refresh16x16.png" alt="Refresh" /></a>
+	  					<a id="refresh_link" onclick="randomQuotation()"><img id="refresh_image" src="/images/refresh16x16.png" alt="Refresh" /></a>
 					</span>
 				</div>
 				
@@ -112,33 +113,33 @@ img.displayed {display: block; float: left; margin-right:5px; }
 					</div>
 					<ul id="quotation_details">
 						<li id="author_name_li">
-							<strong><span id="author_name"></span></strong>&nbsp;<span id="author_notable_for" hidden="hidden"></span>
+							<strong><span id="author_name"></span></strong>&nbsp;<span id="author_notable_for" style="display:none;"></span>
 						</li>
-						<li id="quotation_description" hidden="hidden">
+						<li id="quotation_description" style="display:none;">
 						</li>
-						<li id="quotation_spoken_by_character_li" hidden="hidden">
+						<li id="quotation_spoken_by_character_li" style="display:none;">
 							<strong><fmt:message key="spoken_by_character" bundle="${msg}"/>: </strong><span id="quotation_spoken_by_character"></span>
 						</li>
-						<li id="quotation_source_li" hidden="hidden">
+						<li id="quotation_source_li" style="display:none;">
 							<strong><fmt:message key="source" bundle="${msg}"/>: </strong><span id="quotation_source"></span>
 						</li>
 						<li id="author_summary_li">
-							<img class="displayed" id="author_image" hidden="hidden"/>
-							<span id="author_description" hidden="hidden"></span>
+							<img class="displayed" id="author_image" style="display:none;"/>
+							<span id="author_description" style="display:none;"></span>
 						</li>
-						<li id="author_birth_li" hidden="hidden">
-							<strong><fmt:message key="born" bundle="${msg}"/>: </strong><span id="birth_date"></span>&nbsp;<span id="birth_place" hidden="hidden"></span>
+						<li id="author_birth_li" style="display:none;">
+							<strong><fmt:message key="born" bundle="${msg}"/>: </strong><span id="author_birth_date"></span>&nbsp;<span id="author_birth_place" style="display:none;"></span>
 						</li>
-						<li id="author_death_li" hidden="hidden">
-							<strong><fmt:message key="died" bundle="${msg}"/>: </strong><span id="death_date"></span>&nbsp;<span id="death_place" hidden="hidden"></span>
+						<li id="author_death_li" style="display:none;">
+							<strong><fmt:message key="died" bundle="${msg}"/>: </strong><span id="author_death_date"></span>&nbsp;<span id="author_death_place" style="display:none;"></span>
 						</li>
-						<li id="author_website_li" hidden="hidden">
+						<li id="author_website_li" style="display:none;">
 							<strong><fmt:message key="website" bundle="${msg}"/>: </strong><a id="author_website_url" href="" target="_blank"></a>
 						</li>
 					</ul>
 					<ul>
 						<li style="text-align: right">
-							<a id="freebase_url" href="http://freebase.com" target="_blank"><img src="http://www.gstatic.com/freebase/img/freebase-cc-by-61x23.png"alt="Freebase Creative Commons" /></a>
+							<a id="freebase_link" href="http://freebase.com" target="_blank"><img src="http://www.gstatic.com/freebase/img/freebase-cc-by-61x23.png"alt="Freebase Creative Commons" /></a>
 						</li>
 					</ul>
 				</div>
@@ -188,6 +189,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 				       src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
 				</a>
 			</p>
+			<p>Android is a trademark of Google Inc.</p>
 		</div>
 		<!-- Column 1 ends ====================================================================== -->
 		
@@ -220,7 +222,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 		<div style="text-align: center" id="footerLinks">
 			<ul  style="text-align: center">
 				<li>&copy; 2013 <a href="http://www.bwgz.org" target="_blank">bwgz.org</a>. All rights reserved.</li>
-				<li>Android is a trademark of Google Inc.</li>
+				<li><a href="/policies.html" target="_blank">Terms &amp; Privacy</a></li>
 				<li>Powered by <a href="http://www.typeandgrids.com" target="_blank">Type &amp; Grids</a></li>
 			</ul>
 		</div>
