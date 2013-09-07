@@ -371,12 +371,11 @@ function handleQuotation(mid) {
    	});
 	}
 
-
 function randomQuotation() {
 	$("#refresh_image").attr("src", "/images/spinner_e3e3e3.gif");
 
 	var location = window.location;
-	var query = location.href + "quotation/random/mid";
+	var query = location.protocol + "//" + location.host + location.pathname + "quotation/random/mid";
 	// console.debug("random quotation: " + query);
 	$.getJSON(query, {}).done(function(data) {
 		var mid = data.mid;

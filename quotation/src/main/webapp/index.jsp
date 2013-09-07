@@ -1,4 +1,6 @@
 <!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:fb="http://ogp.me/ns/fb#">
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html;charset=UTF-8"%>
 <fmt:setBundle basename="l10n.string" var="msg" />
@@ -13,11 +15,15 @@ img.displayed {display: block; float: left; margin-right:5px; }
 </style>
 <head>
 <title>Quotation</title>
-<meta name="description" content="Random quotations.">
+<meta name="description" content="Quotation brings you over 35000 random quotes from thousands of authors. Quotation showcases quotes from ancient times to present day. They are a stunning representation of those words that have influenced and molded our language and culture." />
 <meta name="author" content="bwgz.org">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="quotation_mid" content="">
 <meta name="author_mid" content="">
+<meta property="og:url" content="http://quotation.bwgz.org" />
+<meta property="og:title" content="Quotation" />
+<meta property="og:description" content="Quotation brings you over 35000 random quotes from thousands of authors. Quotation showcases quotes from ancient times to present day. They are a stunning representation of those words that have influenced and molded our language and culture." />
+<meta property="og:image" content="http://quotation.bwgz.org/images/favicons/quotation512x512.png" />
 
 <!-- CSS
 ================================================================================================= -->
@@ -62,7 +68,15 @@ img.displayed {display: block; float: left; margin-right:5px; }
 	var locale=<%= "\"" + request.getLocale().toString() + "\"" %>;
 	var localeDatePattern=<%= "\"" + ((java.text.SimpleDateFormat) java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, request.getLocale())).toPattern() + "\"" %>.replace("yy", "yyyy");
 </script>
-<div class="container">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/" + locale + "/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script><div class="container">
 	
 	<!-- Header begins ========================================================================== -->
 	<header class="sixteen columns">
@@ -149,11 +163,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 			
 		
 		</div><!-- col1 -->
-		
-		<!-- Even numbered projects are dynamically moved into this second column via JS -->
-		<div class="eight columns" id="col2">
-		</div>
-	
+		<div class="fb-like" data-href="http://quotation.bwgz.org" data-width="450" data-show-faces="false" data-send="false"></div>
 	</div>
 	<!-- Work page ends ========================================================================= -->
 	
