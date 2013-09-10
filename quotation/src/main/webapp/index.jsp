@@ -1,6 +1,8 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:fb="http://ogp.me/ns/fb#">
+xmlns:og="http://opengraphprotocol.org/schema/"
+xmlns:fb="http://www.facebook.com/2008/fbml">
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html;charset=UTF-8"%>
 <fmt:setBundle basename="l10n.string" var="msg" />
@@ -13,6 +15,18 @@
 <style type="text/css">
 img.displayed {display: block; float: left; margin-right:5px; }
 </style>
+<style type="text/css">
+  #google_plus_link {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url('https://www.gstatic.com/images/icons/gplus-16.png') no-repeat;
+  }
+  #google_plus_link:hover {
+    background: url('https://www.gstatic.com/images/icons/gplus-16.png') no-repeat;
+  }
+</style>
 <head>
 <title>Quotation</title>
 <meta name="description" content="Quotation brings you over 35000 random quotes from thousands of authors. Quotation showcases quotes from ancient times to present day. They are a stunning representation of those words that have influenced and molded our language and culture." />
@@ -20,6 +34,9 @@ img.displayed {display: block; float: left; margin-right:5px; }
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="quotation_mid" content="">
 <meta name="author_mid" content="">
+
+<meta property="fb:app_id" content="553154248088306"/>
+
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://quotation.bwgz.org" />
 <meta property="og:title" content="Quotation" />
@@ -49,16 +66,19 @@ img.displayed {display: block; float: left; margin-right:5px; }
 <script src="/js/libs/jquery.easing.1.3.min.js"></script>
 <script src="/js/libs/jquery.fitvids.js"></script>
 <script src="/js/script.js"></script>
-
+<script src="/js/url.min.js"></script>
 <script src="/js/date.js"></script>
 <script src="/js/quotation.js"></script>
-<script src="/js/twitter.js"></script>
 
 <script src="//apis.google.com/js/client.js?onload=onLoadGoogleClient"></script>
 <script src="//maps.google.com/maps/api/js?key=AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw&sensor=false"></script>
+<script src="//apis.google.com/js/plusone.js"></script>
 
 <link href="/jsImgSlider/1/js-image-slider.css" rel="stylesheet" type="text/css" />
 <script src="/jsImgSlider/1/js-image-slider.js" type="text/javascript"></script>
+
+<script src="/js/twitter.js"></script>
+<script src="/js/facebook.js"></script>
 
 </head>
 <body>
@@ -70,14 +90,16 @@ img.displayed {display: block; float: left; margin-right:5px; }
 	var localeDatePattern=<%= "\"" + ((java.text.SimpleDateFormat) java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, request.getLocale())).toPattern() + "\"" %>.replace("yy", "yyyy");
 </script>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>
+(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/" + locale + "/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-</script><div class="container">
+</script>
+<div class="container">
 	
 	<!-- Header begins ========================================================================== -->
 	<header class="sixteen columns">
@@ -112,9 +134,16 @@ img.displayed {display: block; float: left; margin-right:5px; }
 					</blockquote>
 				</div>
 				<div>
-					<span style="float: left;">
-	  					<a id="twitter_link" href="https://twitter.com" target="_blank"><img src="https://dev.twitter.com/sites/default/files/images_documentation/bird_black_16_0.png" alt="Tweet" /></a>
+  					<a id="twitter_link" href="https://twitter.com" target="_blank"><img src="https://twitter.com/favicons/favicon.ico" alt="Share on Twitter" /></a>
+					<span id="google_plus_link" class="g-interactivepost"
+					    data-clientid="848640002630-vgap1rvadjan9hv51j0r8phatdsv4kt9.apps.googleusercontent.com"
+					    data-contenturl="http://quotation.bwgz.org"
+					    data-calltoactionlabel="OPEN"
+					    data-calltoactionurl="http://quotation.bwgz.org"
+					    data-cookiepolicy="single_host_origin"
+					    data-prefilltext="Quotation - A quotation at the right moment is like bread to the famished.">
 					</span>
+					<a id="facebook_sharer_link" href="https://www.facebook.com/sharer/sharer.php"><img id="facebook_image" src="/images/FB-f-Logo__blue_16.png" alt="Share on Facebook" /></a>
 					<span style="float: right;">
 	  					<a id="refresh_link" onclick="randomQuotation()"><img id="refresh_image" src="/images/refresh16x16.png" alt="Refresh" /></a>
 					</span>
@@ -158,13 +187,12 @@ img.displayed {display: block; float: left; margin-right:5px; }
 						</li>
 					</ul>
 				</div>
-				
 			</div>
 			<!-- Project ends =================================================================== -->
 			
+			<br/>
 		
 		</div><!-- col1 -->
-		<div class="fb-like" data-href="http://quotation.bwgz.org" data-width="450" data-show-faces="false" data-send="false"></div>
 	</div>
 	<!-- Work page ends ========================================================================= -->
 	
@@ -230,6 +258,16 @@ img.displayed {display: block; float: left; margin-right:5px; }
 	<!-- Footer begins ========================================================================== -->
 	<footer class="sixteen columns">
 		<hr />
+		<div id="footerLinks">
+			<ul>
+				<li>
+				    <g:plusone></g:plusone>
+				</li>
+				<li>
+					<div class="fb-like" data-href="http://quotation.bwgz.org" data-width="450" data-show-faces="false" data-send="false"></div>
+				</li>
+			</ul>
+		</div>
 		<div style="text-align: center" id="footerLinks">
 			<ul  style="text-align: center">
 				<li>&copy; 2013 <a href="http://www.bwgz.org" target="_blank">bwgz.org</a>. All rights reserved.</li>

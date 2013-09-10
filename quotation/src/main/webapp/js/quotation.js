@@ -316,15 +316,16 @@ function handleQuotation(mid) {
     	'params': { "lang": locale }
     	});
 	request.execute(function(result) {
+		var url = location.protocol + "//" + location.host + "/quotation" + mid;
     	
 		var value = getPropertyValueByIndex(result, '/type/object/name', 0);
 		if (value == null) {
 			$("#quotation").text("");
-			$("#twitter_link").attr("href", "https://twitter.com/intent/tweet");
+			$("#twitter_link").attr("href", "https://twitter.com/intent/share");
 		}
 		else {
 			var quotation = value.value;
-			var tweet = quotation;
+			var share = quotation;
 
 			$("#quotation").text(quotation);
 			
@@ -361,27 +362,45 @@ function handleQuotation(mid) {
 				$("#author_name").text(value.text);
 				$("#author_name_li").show();
 				
-				tweet += " " + value.text;
+				share += " " + value.text;
 				
 				handleAuthor(value.id);
 			}
 			
-			$("#twitter_link").attr("href", "https://twitter.com/intent/tweet?text=" + tweet);
+			share += " " + url;
+
+			$("#twitter_link").attr("href", "https://twitter.com/intent/tweet?text=" + share);
+			$("#facebook_sharer_link").attr("href", "https://www.facebook.com/sharer/sharer.php?u=" + url + "&h1=" + locale);
+			var options = {
+				contenturl: 'http://quotation.bwgz.org/',
+				clientid: '848640002630-vgap1rvadjan9hv51j0r8phatdsv4kt9.apps.googleusercontent.com',
+			    cookiepolicy: 'single_host_origin',
+			    prefilltext: share,
+			    calltoactionlabel: 'OPEN',
+			    calltoactionurl: url
+			  };
+			gapi.interactivepost.render('google_plus_link', options);
 		}
    	});
+	
+	$("#refresh_image").attr("src", "/images/refresh16x16.png");
 	}
 
 function randomQuotation() {
 	$("#refresh_image").attr("src", "/images/spinner_e3e3e3.gif");
 
 	var location = window.location;
-	var query = location.protocol + "//" + location.host + location.pathname + "quotation/random/mid";
+	var query = location.protocol + "//" + location.host + "/" + "quotation/random/mid";
 	// console.debug("random quotation: " + query);
 	$.getJSON(query, {}).done(function(data) {
 		var mid = data.mid;
 		// console.debug("mid: " + mid);
 		//mid = "/m/0c7cy7d";
 		handleQuotation(mid);
+		
+		var url = location.protocol + "//" + location.host + "/quotation" + mid;
+		window.history.pushState("quotation", "Quotation", url);
+		
 		$("#refresh_image").attr("src", "/images/refresh16x16.png");
 	}).fail(function(jqxhr, textStatus, error) {
 		//console.error(jqxhr);
@@ -390,17 +409,46 @@ function randomQuotation() {
     });
 }
 
+function parseMid(url) {
+	var mid = null;
+	
+	var path = $.url('path', url);
+	mid = path.indexOf('/quotation/m/') == 0 ? path.slice('/quotation'.length, path.length) : null;
+	if (mid == null) {
+		mid = $.url('?mid', url);
+	}
+	
+	return mid;
+}
+
 var loaded = 0;
 function initialize(message) {
 	loaded++;
 	
 	if (loaded == 2) {
-		randomQuotation();
+		var mid = parseMid(location.href);
+		
+		if (mid != null && mid.length != 0) {
+			handleQuotation(mid);
+		}
+		else {
+			randomQuotation();
+		}
 	}
 }
 
 $(document).ready(function() {
     initialize("ready");
+    
+    window.onpopstate = function(event) {
+    	  var mid = parseMid(document.location.href);
+    	  if (mid == null) {
+    		  randomQuotation();
+    	  }
+    	  else {
+    		  handleQuotation(mid);
+    	  }
+	};
 });
 
 function onLoadGoogleClient() {
