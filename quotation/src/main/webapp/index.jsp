@@ -55,9 +55,9 @@ img.displayed {display: block; float: left; margin-right:5px; }
 
 <!-- Favicons
 ================================================================================================= -->
-<link rel="shortcut icon" type="image/png" href="/images/favicons/quotation16x16bw.png">
-<link rel="apple-touch-icon" href="/images/favicons/quotation48x48bw.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/quotation72x72bw.png">
+<link rel="shortcut icon" type="image/png" href="/images/favicons/quotation16x16.png">
+<link rel="apple-touch-icon" href="/images/favicons/quotation48x48.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/quotation72x72.png">
 
 <!-- JS
 ================================================================================================= -->
@@ -99,10 +99,49 @@ img.displayed {display: block; float: left; margin-right:5px; }
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43948204-1', 'bwgz.org');
+  ga('send', 'pageview');
+
+</script>
 <div class="container">
-	
+
 	<!-- Header begins ========================================================================== -->
 	<header class="sixteen columns">
+		<div id='leaderboard'>
+			<script type="text/javascript">
+				adUnit= document.getElementById("leaderboard");
+				google_ad_client = "ca-pub-8991766207606774";
+				
+				if (adUnit.offsetWidth < 320) {
+					/* Quotation Top 234 x 60 - Half Banner */
+					google_ad_slot = "2894065247";
+					google_ad_width = 234;
+					google_ad_height = 60;
+				} else if (adUnit.offsetWidth < 728) {
+					/* Quotation Top 320 x 50 - Mobile Banner */
+					google_ad_slot = "4789600846";
+					google_ad_width = 320;
+					google_ad_height = 50;
+				}
+				else {
+					/* Quotation Top 728 x 90 - Leaderboard */
+					google_ad_slot = "8000419246";
+					google_ad_width = 728;
+					google_ad_height = 90;
+				}
+				
+				$("#leaderboard").attr("style", "margin: 0 auto; width: " + google_ad_width + "px;");
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+		</div>
 		<div id="logo">
 			<h1>Quotation</h1>
 			<h2>A quotation at the right moment is like bread to the famished.</h2>
@@ -134,7 +173,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 					</blockquote>
 				</div>
 				<div>
-  					<a id="twitter_link" href="https://twitter.com" target="_blank"><img src="https://twitter.com/favicons/favicon.ico" alt="Share on Twitter" /></a>
+  					<a id="twitter_link" href="https://twitter.com" target="_blank"><img src="/images/twitter16x16.png" alt="Share on Twitter" /></a>
 					<span id="google_plus_link" class="g-interactivepost"
 					    data-clientid="848640002630-vgap1rvadjan9hv51j0r8phatdsv4kt9.apps.googleusercontent.com"
 					    data-contenturl="http://quotation.bwgz.org"

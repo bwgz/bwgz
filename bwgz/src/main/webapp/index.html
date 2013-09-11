@@ -23,10 +23,10 @@
 
 <!-- Favicons
 ================================================================================================= -->
-<link rel="shortcut icon" href="images/favicons/favicon.ico">
-<link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="images/favicons/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="images/favicons/apple-touch-icon-114x114.png">
+<link rel="shortcut icon" href="images/favicons/bwgz16x16.png">
+<link rel="apple-touch-icon" href="images/favicons/bwgz57x57.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/favicons/bwgz72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/favicons/bwgz114x114.png">
 
 <!-- JS
 ================================================================================================= -->
@@ -230,6 +230,10 @@
 			
 			<ul class="linedList">
 				<li><strong>Email: </strong> <a href="mailto:bruce@bwgz.org">bruce@bwgz.org</a></li>
+				<li><strong>Blog:</strong> <a href="http://bwgz57.wordpress.com" target="_blank">bwgz57.wordpress.com</a></li>
+				<li><strong>Twitter:</strong> <a href="http://www.twitter.com/bwgz" target="_blank">@bwgz</a></li>
+				<li><strong>GitHub:</strong> <a href="https://github.com/bwgz57" target="_blank">github.com/bwgz57</a></li>
+				<li><strong>Google Code:</strong> <a href="https://code.google.com/p/bwgz-org/" target="_blank">bwgz-org</a>, <a href="https://code.google.com/p/noip4aws/" target="_blank">noip4aws</a></li>
 			<!--  
 				<li><strong>Location: </strong>Eden Priarie, MN</li>
 				<li><strong>R&eacute;sum&eacute;:</strong> <a href="resume.pdf">resume.pdf</a></li>
@@ -245,6 +249,35 @@
 	
 	<!-- Footer begins ========================================================================== -->
 	<footer class="sixteen columns">
+		<div id='leaderboard'>
+			<script type="text/javascript">
+				adUnit= document.getElementById("leaderboard");
+				google_ad_client = "ca-pub-8991766207606774";
+				
+				if (adUnit.offsetWidth < 320) {
+					/* Quotation Top 234 x 60 - Half Banner */
+					google_ad_slot = "2894065247";
+					google_ad_width = 234;
+					google_ad_height = 60;
+				} else if (adUnit.offsetWidth < 728) {
+					/* Quotation Top 320 x 50 - Mobile Banner */
+					google_ad_slot = "4789600846";
+					google_ad_width = 320;
+					google_ad_height = 50;
+				}
+				else {
+					/* Quotation Top 728 x 90 - Leaderboard */
+					google_ad_slot = "8000419246";
+					google_ad_width = 728;
+					google_ad_height = 90;
+				}
+				
+				$("#leaderboard").attr("style", "margin: 0 auto; width: " + google_ad_width + "px;");
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+		</div>
 		<hr />
 		<div style="text-align: center">
 			<ul id="footerLinks">

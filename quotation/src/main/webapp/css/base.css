@@ -885,7 +885,8 @@ button.currentPage:hover {
 }
 
 header {
-	padding-top: 80px;
+	/* padding-top: 80px; */
+	padding-top: 10px;
 	border-top: 3px solid #000;
 }
 
