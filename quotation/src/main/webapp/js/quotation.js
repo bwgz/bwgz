@@ -32,10 +32,12 @@ function getPropertyValueById(data, property, id) {
 	var value = null;
 	
 	var values = getPropertyValues(data, property);
-	for (var i = 0; i < values.length; i++) {
-		if (values[i].id == id) {
-			value = values[i];
-			break;
+	if (values != null) {
+		for (var i = 0; i < values.length; i++) {
+			if (values[i].id == id) {
+				value = values[i];
+				break;
+			}
 		}
 	}
 	
