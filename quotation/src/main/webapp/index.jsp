@@ -14,6 +14,14 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 
 <style type="text/css">
 img.displayed {display: block; float: left; margin-right:5px; }
+#refresh_image { 
+	padding-left: 5px;
+	cursor: pointer;
+}
+#info_link { cursor: pointer; }
+#blockquote_quotation:hover {
+	background-color: #f7f7f7;
+}
 </style>
 <style type="text/css">
   #google_plus_link {
@@ -61,7 +69,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 
 <!-- JS
 ================================================================================================= -->
-<script src="/js/libs/modernizr.min.js"></script>
+<script src="/js/libs/modernizr.custom.84777.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="/js/libs/jquery.easing.1.3.min.js"></script>
 <script src="/js/libs/jquery.fitvids.js"></script>
@@ -106,8 +114,6 @@ img.displayed {display: block; float: left; margin-right:5px; }
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-43948204-1', 'bwgz.org');
-  ga('send', 'pageview');
-
 </script>
 <div class="container">
 
@@ -166,8 +172,8 @@ img.displayed {display: block; float: left; margin-right:5px; }
 		
 			<!-- Project begins ================================================================= -->
 			<div class="project">
-				<div class="projectThumbnail">
-					<blockquote>
+				<div id="quotation_thumbnail" class="projectThumbnail">
+					<blockquote id="blockquote_quotation">
 						<h3 id="quotation">
  						</h3>
 					</blockquote>
@@ -184,16 +190,12 @@ img.displayed {display: block; float: left; margin-right:5px; }
 					</span>
 					<a id="facebook_sharer_link" href="https://www.facebook.com/sharer/sharer.php"><img id="facebook_image" src="/images/FB-f-Logo__blue_16.png" alt="Share on Facebook" /></a>
 					<span style="float: right;">
+	  					<img id="info_link" src="/images/info_open.png" /></a>
 	  					<a id="refresh_link" onclick="randomQuotation()"><img id="refresh_image" src="/images/refresh16x16.png" alt="Refresh" /></a>
 					</span>
 				</div>
 				
 				<div class="projectInfo" style="width: 100%">
-					<div class="projectNavCounter"></div>
-					<div class="projectNav">
-						<div class="projectNavClose"><button class="closeButton"><fmt:message key="close" bundle="${msg}"/></button></div>
-						<div class="projectNavButtons"><button class="prev"></button><button class="next"></button></div>
-					</div>
 					<ul id="quotation_details">
 						<li id="author_name_li">
 							<strong><span id="author_name"></span></strong>&nbsp;<span id="author_notable_for" style="display:none;"></span>
@@ -256,18 +258,18 @@ img.displayed {display: block; float: left; margin-right:5px; }
 			</ul>
 			<p>
 				Quotation for Android is available for free at 
-				<a href="https://play.google.com/store/apps/details?id=org.bwgz.quotation">
+				<a id="google_play_link" href="https://play.google.com/store/apps/details?id=org.bwgz.quotation">
 				Google Play
 				</a>
 				.
 			</p>
 			<p>
-				<a href="https://play.google.com/store/apps/details?id=org.bwgz.quotation">
+				<a id="google_play_link" href="https://play.google.com/store/apps/details?id=org.bwgz.quotation">
 				  <img alt="Android app on Google Play"
-				       src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+				       src="https://developer.android.com/images/brand/en_app_rgb_wo_60.png" />
 				</a>
 			</p>
-			<p>Android is a trademark of Google Inc.</p>
+			<p>Android&trade; is a trademark of Google Inc.</p>
 		</div>
 		<!-- Column 1 ends ====================================================================== -->
 		
@@ -297,17 +299,22 @@ img.displayed {display: block; float: left; margin-right:5px; }
 	<!-- Footer begins ========================================================================== -->
 	<footer class="sixteen columns">
 		<hr />
-		<div id="footerLinks">
-			<ul>
+		<div id="footerLinks" style="text-align: center">
+			<ul style="text-align: center">
 				<li>
 				    <g:plusone></g:plusone>
 				</li>
 				<li>
 					<div class="fb-like" data-href="http://quotation.bwgz.org" data-width="450" data-show-faces="false" data-send="false"></div>
 				</li>
+				<li>
+					<a id="google_play_footer_link" href="https://play.google.com/store/apps/details?id=org.bwgz.quotation">
+					  <img alt="Get it on Google Play" src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+					</a>
+				</li>
 			</ul>
 		</div>
-		<div style="text-align: center" id="footerLinks">
+		<div id="footerLinks" style="text-align: center">
 			<ul  style="text-align: center">
 				<li>&copy; 2013 <a href="http://www.bwgz.org" target="_blank">bwgz.org</a>. All rights reserved.</li>
 				<li><a href="/policies.html" target="_blank">Terms &amp; Privacy</a></li>

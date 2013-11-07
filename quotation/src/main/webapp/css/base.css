@@ -892,7 +892,6 @@ header {
 
 #logo, #logoDetailView {
 	float: left;
-	cursor: pointer;
 }
 
 #logo img, #logoDetailView img {
@@ -1056,6 +1055,9 @@ nav ul li button:hover, nav ul li button:active, nav ul li button:focus, nav ul 
 
 .projectInfo {
 	overflow: hidden;
+	border-top: 1px solid #ddd;
+	padding-top: 4px;
+	margin-top: 30px;
 }
 
 .projectInfo h4 {

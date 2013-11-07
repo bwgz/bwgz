@@ -386,9 +386,11 @@ function handleQuotation(mid) {
    	});
 	
 	$("#refresh_image").attr("src", "/images/refresh16x16.png");
-	}
+	
+	ga('send', 'pageview');
+}
 
-function randomQuotation() {
+function randomQuotation(replace) {
 	$("#refresh_image").attr("src", "/images/spinner_e3e3e3.gif");
 
 	var location = window.location;
@@ -400,8 +402,16 @@ function randomQuotation() {
 		//mid = "/m/0c7cy7d";
 		handleQuotation(mid);
 		
-		var url = location.protocol + "//" + location.host + "/quotation" + mid;
-		window.history.pushState("quotation", "Quotation", url);
+	    if (Modernizr.history) {
+	    	var url = location.protocol + "//" + location.host + "/quotation" + mid;
+			//console.debug("randomQuotation - url: " + url);
+			if (replace) {
+				window.history.replaceState("quotation", "Quotation", url);
+			}
+			else {
+				window.history.pushState("quotation", "Quotation", url);
+			}
+	    }
 		
 		$("#refresh_image").attr("src", "/images/refresh16x16.png");
 	}).fail(function(jqxhr, textStatus, error) {
@@ -428,29 +438,63 @@ function initialize(message) {
 	loaded++;
 	
 	if (loaded == 2) {
+	    $('#refresh_link').on('click', function() {
+	    	ga('send', 'event', 'button', 'click', 'new');
+		});
+	    $('#quotation_thumbnail').on('click', function() {
+	    	ga('send', 'event', 'display', 'click');
+		});
+	    $('#info_link').on('click', function() {
+	    	ga('send', 'event', 'button', 'click', 'info');
+		});
+	    $('#work').on('click', function() {
+	    	ga('send', 'event', 'tab', 'click', 'home');
+		});
+	    $('#about').on('click', function() {
+	    	ga('send', 'event', 'tab', 'click', 'mobile');
+		});
+	    $('#twitter_link').on('click', function() {
+	    	ga('send', 'social', 'twitter', 'share', location.hostname, {'page': location.pathname});
+		});
+	    $('#google_plus_link').on('click', function() {
+	    	ga('send', 'social', 'google+', 'share', location.hostname, {'page': location.pathname});
+		});
+	    $('#facebook_sharer_link').on('click', function() {
+	    	ga('send', 'social', 'facebook', 'share', location.hostname, {'page': location.pathname});
+		});
+	
+	    if (Modernizr.history) {
+			window.onpopstate = function(event) {
+				//console.debug("onpopstate - event.state: " + event.state);
+				//console.debug("onpopstate - location.href: " + location.href);
+				
+				if (event.state != null) {
+					var mid = parseMid(location.href);
+					//console.debug("onpopstate - mid: " + mid);
+					if (mid == null || mid.length == 0) {
+						randomQuotation(false);
+					}
+					else {
+						handleQuotation(mid);
+					}
+				}
+			};
+	    }
+	    
 		var mid = parseMid(location.href);
-		
-		if (mid != null && mid.length != 0) {
-			handleQuotation(mid);
+		//console.debug("initialize - mid: " + mid);
+		if (mid == null || mid.length == 0) {
+			randomQuotation(true);
 		}
 		else {
-			randomQuotation();
+			handleQuotation(mid);
 		}
+
 	}
 }
 
 $(document).ready(function() {
     initialize("ready");
-    
-    window.onpopstate = function(event) {
-    	  var mid = parseMid(document.location.href);
-    	  if (mid == null) {
-    		  randomQuotation();
-    	  }
-    	  else {
-    		  handleQuotation(mid);
-    	  }
-	};
 });
 
 function onLoadGoogleClient() {
