@@ -13,7 +13,7 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 
 <style type="text/css">
-img.displayed {display: block; float: left; margin-right:5px; }
+img.displayed {margin-right: 5px; }
 #refresh_image { 
 	padding-left: 5px;
 	cursor: pointer;
@@ -69,10 +69,11 @@ img.displayed {display: block; float: left; margin-right:5px; }
 
 <!-- JS
 ================================================================================================= -->
-<script src="/js/libs/modernizr.custom.84777.js"></script>
+<script src="/js/libs/modernizr.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="/js/libs/jquery.easing.1.3.min.js"></script>
 <script src="/js/libs/jquery.fitvids.js"></script>
+<script src="/js/libs/jquery.history.js"></script>
 <script src="/js/script.js"></script>
 <script src="/js/url.min.js"></script>
 <script src="/js/date.js"></script>
@@ -176,6 +177,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 					<blockquote id="blockquote_quotation">
 						<h3 id="quotation">
  						</h3>
+						<strong><span id="quotation_author_name" style="font-style: normal; display:none;"></span></strong>
 					</blockquote>
 				</div>
 				<div>
@@ -209,7 +211,7 @@ img.displayed {display: block; float: left; margin-right:5px; }
 							<strong><fmt:message key="source" bundle="${msg}"/>: </strong><span id="quotation_source"></span>
 						</li>
 						<li id="author_summary_li">
-							<img class="displayed" id="author_image" style="display:none;"/>
+							<img class="displayed" id="author_image" align="left" style="display:none;"/>
 							<span id="author_description" style="display:none;"></span>
 						</li>
 						<li id="author_birth_li" style="display:none;">

@@ -354,6 +354,8 @@ function handleQuotation(mid) {
 			value = getPropertyValueByIndex(result, '/media_common/quotation/author', 0);
 			if (value == null) {
 				$('meta[name=author_mid]').attr('content', '');
+				$("#quotation_author_name").hide();
+
 				$("#author_name_li").hide();
 				$("#author_summary_li").hide();
 				$("#author_birth_li").hide();
@@ -361,6 +363,9 @@ function handleQuotation(mid) {
 				$("#author_website_li").hide();
 			}
 			else {
+				$("#quotation_author_name").text(value.text);
+				$("#quotation_author_name").show();
+
 				$("#author_name").text(value.text);
 				$("#author_name_li").show();
 				
@@ -400,19 +405,18 @@ function randomQuotation(replace) {
 		var mid = data.mid;
 		// console.debug("mid: " + mid);
 		//mid = "/m/0c7cy7d";
-		handleQuotation(mid);
 		
-	    if (Modernizr.history) {
+	    var History = window.History;
+	    if (History.enabled) {
 	    	var url = location.protocol + "//" + location.host + "/quotation" + mid;
-			//console.debug("randomQuotation - url: " + url);
-			if (replace) {
-				window.history.replaceState("quotation", "Quotation", url);
-			}
-			else {
-				window.history.pushState("quotation", "Quotation", url);
-			}
+	    	if (replace) {
+	    		History.replaceState({mid: mid}, "Quotation", url);
+	    	}
+	    	else {
+	    		History.pushState({mid: mid}, "Quotation", url);
+	    	}
 	    }
-		
+
 		$("#refresh_image").attr("src", "/images/refresh16x16.png");
 	}).fail(function(jqxhr, textStatus, error) {
 		//console.error(jqxhr);
@@ -426,6 +430,20 @@ function parseMid(url) {
 	
 	var path = $.url('path', url);
 	mid = path.indexOf('/quotation/m/') == 0 ? path.slice('/quotation'.length, path.length) : null;
+	
+	if (mid == null) {
+		var hash = $.url('#', url);
+		if (hash != null && hash.indexOf('quotation/m/') == 0) {
+			var start = 'quotation'.length;
+			var end = hash.indexOf('?&');
+			
+			if (end == -1) {
+				end = hash.length;
+			}
+			mid = hash.slice(start, end);
+		}
+	}
+	
 	if (mid == null) {
 		mid = $.url('?mid', url);
 	}
@@ -463,33 +481,17 @@ function initialize(message) {
 	    	ga('send', 'social', 'facebook', 'share', location.hostname, {'page': location.pathname});
 		});
 	
-	    if (Modernizr.history) {
-			window.onpopstate = function(event) {
-				//console.debug("onpopstate - event.state: " + event.state);
-				//console.debug("onpopstate - location.href: " + location.href);
-				
-				if (event.state != null) {
-					var mid = parseMid(location.href);
-					//console.debug("onpopstate - mid: " + mid);
-					if (mid == null || mid.length == 0) {
-						randomQuotation(false);
-					}
-					else {
-						handleQuotation(mid);
-					}
-				}
-			};
-	    }
-	    
+	    History.Adapter.bind(window, 'statechange', function() {
+			handleQuotation(History.getState().data.mid);
+	    });
+
 		var mid = parseMid(location.href);
-		//console.debug("initialize - mid: " + mid);
 		if (mid == null || mid.length == 0) {
 			randomQuotation(true);
 		}
 		else {
 			handleQuotation(mid);
 		}
-
 	}
 }
 
