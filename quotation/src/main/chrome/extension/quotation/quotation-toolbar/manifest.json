@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Quotation",
+  "name": "Quotation Toolbar",
+  "short_name": "Quotation",
   "description": "A quotation at the right moment is like bread to the famished.",
   "version": "1.0.0",
   "browser_action": {
@@ -8,7 +9,7 @@
       "19": "19.png",
       "38": "38.png"
     },
-    "default_title": "Quotation",
+    "default_title": "Quotation Toolbar",
     "default_popup": "popup.html"
   },
   "icons": {
@@ -16,5 +17,5 @@
    "48": "48.png",
    "128": "128.png"
   },
-  "content_security_policy": "script-src 'self' https://apis.google.com https://www.google-analytics.com; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
 }
