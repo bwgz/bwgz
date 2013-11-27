@@ -27,6 +27,7 @@ function getPropertyValueByIndex(data, property, index) {
 function handleQuotation(mid) {
 	$("#quotation_link").attr("href", "http://quotation.bwgz.org/quotation" + mid);
 	$("#freebase_link").attr("href", "http://freebase.com" + mid);
+	
     var request = gapi.client.request({
     	'path': '/freebase/v1/topic' + mid
     	});
@@ -41,8 +42,6 @@ function handleQuotation(mid) {
 				$("#author_image").attr("src", "https://usercontent.googleapis.com/freebase/v1/image" + value.id + "?key=AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw");
 			}
 		}
-		$("#gloader").hide();    
-	}).fail(function(jqxhr, textStatus, error) {
 		$("#gloader").hide();    
     });
 }

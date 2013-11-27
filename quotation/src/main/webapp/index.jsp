@@ -92,11 +92,14 @@ img.displayed {margin-right: 5px; }
 </head>
 <body>
 
-<!-- Write preloader to page - this allows the site to load for users with JS disabled -->
 <script type="text/javascript">
+<!-- Write preloader to page - this allows the site to load for users with JS disabled -->
 	document.write("<div id='sitePreloader'><div id='preloaderImage'><img src='/images/site_preloader.gif' alt='Preloader' /></div></div>");
 	var locale=<%= "\"" + request.getLocale().toString() + "\"" %>;
-	var localeDatePattern=<%= "\"" + ((java.text.SimpleDateFormat) java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, request.getLocale())).toPattern() + "\"" %>.replace("yy", "yyyy");
+	var localeDatePattern=<%= "\"" + ((java.text.SimpleDateFormat) java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, request.getLocale())).toPattern() + "\"" %>;
+	if (localeDatePattern.indexof("yyyy") != -1) {
+		localeDatePattern = localeDatePattern.replace("yy", "yyyy");
+	}
 </script>
 <div id="fb-root"></div>
 <script>
