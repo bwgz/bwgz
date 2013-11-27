@@ -19,6 +19,7 @@ img.displayed {margin-right: 5px; }
 	cursor: pointer;
 }
 #info_link { cursor: pointer; }
+#see_all_link { cursor: pointer; }
 #blockquote_quotation:hover {
 	background-color: #f7f7f7;
 }
@@ -97,7 +98,7 @@ img.displayed {margin-right: 5px; }
 	document.write("<div id='sitePreloader'><div id='preloaderImage'><img src='/images/site_preloader.gif' alt='Preloader' /></div></div>");
 	var locale=<%= "\"" + request.getLocale().toString() + "\"" %>;
 	var localeDatePattern=<%= "\"" + ((java.text.SimpleDateFormat) java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT, request.getLocale())).toPattern() + "\"" %>;
-	if (localeDatePattern.indexof("yyyy") != -1) {
+	if (localeDatePattern.indexOf("yyyy") == -1) {
 		localeDatePattern = localeDatePattern.replace("yy", "yyyy");
 	}
 </script>
@@ -195,9 +196,11 @@ img.displayed {margin-right: 5px; }
 					</span>
 					<a id="facebook_sharer_link" href="https://www.facebook.com/sharer/sharer.php"><img id="facebook_image" src="/images/FB-f-Logo__blue_16.png" alt="Share on Facebook" /></a>
 					<span style="float: right;">
-	  					<img id="info_link" src="/images/info_open.png" /></a>
 	  					<a id="refresh_link" onclick="randomQuotation()"><img id="refresh_image" src="/images/refresh16x16.png" alt="Refresh" /></a>
 					</span>
+				</div>
+				<div style="width:100%; text-align:center">
+	  				<img id="info_link" src="/images/arrow-down.png" />
 				</div>
 				
 				<div class="projectInfo" style="width: 100%">

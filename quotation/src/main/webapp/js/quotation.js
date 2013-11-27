@@ -465,6 +465,9 @@ function initialize(message) {
 	    $('#info_link').on('click', function() {
 	    	ga('send', 'event', 'button', 'click', 'info');
 		});
+	    $('#see_all_link').on('click', function() {
+	    	ga('send', 'event', 'button', 'click', 'all');
+		});
 	    $('#work').on('click', function() {
 	    	ga('send', 'event', 'tab', 'click', 'home');
 		});

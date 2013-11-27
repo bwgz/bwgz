@@ -91,13 +91,13 @@ jQuery(document).ready(function($) {
 
 	function openProjectInfo() {
 		projectInfo.stop().delay(200).slideDown(900);
-		$("#info_link").attr("src", "/images/info_close.png");
+		$("#info_link").attr("src", "/images/arrow-up.png");
 		projectInfoOpen = true;
 	}
 
 	function closeProjectInfo() {
 		projectInfo.slideUp(900);
-		$("#info_link").attr("src", "/images/info_open.png");
+		$("#info_link").attr("src", "/images/arrow-down.png");
 		projectInfoOpen = false;
 	}
 
@@ -111,6 +111,7 @@ jQuery(document).ready(function($) {
 	});
 	
 	$("#info_link").click(function(e) {
+		console.debug("info_link: " + e);
 		if(projectInfoOpen) {
 			closeProjectInfo();
 		}
