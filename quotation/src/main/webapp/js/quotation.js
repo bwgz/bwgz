@@ -397,16 +397,14 @@ function handleQuotation(mid) {
 
 function randomQuotation(replace) {
 	$("#refresh_image").attr("src", "/images/spinner_e3e3e3.gif");
-
+	
 	var location = window.location;
 	var query = location.protocol + "//" + location.host + "/" + "quotation/random/mid";
 	// console.debug("random quotation: " + query);
 	$.getJSON(query, {}).done(function(data) {
 		var mid = data.mid;
-		// console.debug("mid: " + mid);
 		//mid = "/m/0c7cy7d";
 		
-	    var History = window.History;
 	    if (History.enabled) {
 	    	var url = location.protocol + "//" + location.host + "/quotation" + mid;
 	    	if (replace) {
@@ -488,12 +486,15 @@ function initialize(message) {
 			handleQuotation(History.getState().data.mid);
 	    });
 
+		var location = window.location;
 		var mid = parseMid(location.href);
 		if (mid == null || mid.length == 0) {
 			randomQuotation(true);
 		}
 		else {
-			handleQuotation(mid);
+		    var url = location.protocol + "//" + location.host + "/quotation" + mid;
+		    History.replaceState({mid: mid}, "Quotation", url);
+		    handleQuotation(mid);
 		}
 	}
 }

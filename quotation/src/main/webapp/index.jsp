@@ -108,7 +108,7 @@ img.displayed {margin-right: 5px; }
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/" + locale + "/all.js#xfbml=1";
+  js.src = "//connect.facebook.net/" + locale + "/all.js#xfbml=1&appId=553154248088306";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
@@ -196,7 +196,7 @@ img.displayed {margin-right: 5px; }
 					</span>
 					<a id="facebook_sharer_link" href="https://www.facebook.com/sharer/sharer.php"><img id="facebook_image" src="/images/FB-f-Logo__blue_16.png" alt="Share on Facebook" /></a>
 					<span style="float: right;">
-	  					<a id="refresh_link" onclick="randomQuotation()"><img id="refresh_image" src="/images/refresh16x16.png" alt="Refresh" /></a>
+	  					<a id="refresh_link" onclick="randomQuotation(false)"><img id="refresh_image" src="/images/refresh16x16.png" alt="Refresh" /></a>
 					</span>
 				</div>
 				<div style="width:100%; text-align:center">
