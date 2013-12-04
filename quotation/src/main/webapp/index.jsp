@@ -308,22 +308,17 @@ img.displayed {margin-right: 5px; }
 	<footer class="sixteen columns">
 		<hr />
 		<div id="footerLinks" style="text-align: center">
-			<ul style="text-align: center">
-				<li>
-				    <g:plusone></g:plusone>
-				</li>
-				<li>
-					<div class="fb-like" data-href="http://quotation.bwgz.org" data-width="450" data-show-faces="false" data-send="false"></div>
-				</li>
-				<li>
-					<a id="google_play_footer_link" href="https://play.google.com/store/apps/details?id=org.bwgz.quotation">
-					  <img alt="Get it on Google Play" src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
-					</a>
-				</li>
-			</ul>
+			    <g:plusone></g:plusone>
+				<div class="fb-like" data-href="http://quotation.bwgz.org" data-width="450" data-show-faces="false" data-send="false"></div>
+				<a id="google_play_footer_link" href="https://play.google.com/store/apps/details?id=org.bwgz.quotation">
+				  <img alt="Get it on Google Play" height="40px" src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+				</a>
+				<a id="chrome_web_store_footer_link" href="https://chrome.google.com/webstore/detail/quotation-toolbar/kkbpnlhcdkkiocejdinadlcmjlfmajop">
+				  <img alt="Available in the Chrome Web Store" height="40px" src="https://developers.google.com/chrome/web-store/images/branding/ChromeWebStore_Badge_v2_206x58.png" />
+				</a>
 		</div>
 		<div id="footerLinks" style="text-align: center">
-			<ul  style="text-align: center">
+			<ul>
 				<li>&copy; 2013 <a href="http://www.bwgz.org" target="_blank">bwgz.org</a>. All rights reserved.</li>
 				<li><a href="/policies.html" target="_blank">Terms &amp; Privacy</a></li>
 				<li>Powered by <a href="http://www.typeandgrids.com" target="_blank">Type &amp; Grids</a></li>
