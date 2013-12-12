@@ -1,18 +1,61 @@
+var selected = 'keyword_quotation';
 var query;
 var index = 0;
 var length = 0;
 var max = 0;
-var step = 10;
+var step = 8;
+
+function updateAuthor(mid, id) {
+    request = gapi.client.request({
+    	'path': 'freebase/v1/topic' + mid,
+    	'params': {
+    		'filter': '/media_common/quotation/author',
+    	}
+    });
+
+	request.execute(function(json) {
+		if (json.property != undefined) {
+			var values = json.property['/media_common/quotation/author'].values;
+			
+			for (var i = 0; i < values.length; i++) {
+				if (i != 0) {
+					$('#' + id).append(', ');
+				}
+				$('#' + id).append(values[i].text);
+			}
+		}
+    });
+}
 
 function page(cursor, limit) {
-    request = gapi.client.request({
-    	'path': '/freebase/v1/search',
-    	'params': {
+	var params;
+	
+	if (selected == 'keyword_quotation') {
+		params = {
     		'query':  query,
     		'filter': '(any type:/media_common/quotation)',
     		'cursor': cursor,
     		'limit':  limit
-    	}
+		};
+	}
+	else if (selected == 'author_quotation') {
+		params = {
+    		'filter': '(all type:/media_common/quotation /media_common/quotation/author:"' + query + '")',
+    		'cursor': cursor,
+    		'limit':  limit
+		};
+	}
+	else if (selected == 'subject_quotation') {
+		params = {
+    		'filter': '(all type:/media_common/quotation /media_common/quotation/subjects:"' + query + '")',
+    		'cursor': cursor,
+    		'limit':  limit
+		};
+	}
+	
+    request = gapi.client.request({
+    	'path': '/freebase/v1/search',
+    	'params': params
     });
 	request.execute(function(json) {
 		if (json.error != undefined) {
@@ -35,10 +78,12 @@ function page(cursor, limit) {
 					var mid = json.result[i].mid;
 					var url = "http://quotation.bwgz.org/quotation" + mid;
 					
-					var id = "item-" + i;
+					var quotation_id = "item-" + i;
+					var author_id = "item-authors-" + i;
 					
-					$("#quotation-list").append('<div class="result"><a id="' + id + '" href="' + url + '" data-mid="' + mid + '" target="_blank">' + json.result[i].name + '</a></div>');
-				    $('#' + id).click(function() {
+					$("#quotation-list").append('<div class="result"><a id="' + quotation_id + '" href="' + url + '" data-mid="' + mid + '" target="_blank">' + json.result[i].name + '</a><div id="' + author_id + '" style="font-style:italic;"></div></div>');
+					updateAuthor(mid, author_id);
+					$('#' + quotation_id).click(function() {
 				        _gaq.push(['_trackEvent', 'result-link', 'clicked', $(this).attr('data-mid')]);
 					});
 					
@@ -78,7 +123,7 @@ function page(cursor, limit) {
 		}
 		$("#pages").append(string);
 	    $('.page').click(function() {
-	        page(parseInt($(this).attr('data-index')), 10);
+	        page(parseInt($(this).attr('data-index')), step);
 	        _gaq.push(['_trackEvent', 'page', 'clicked', query]);
 	    });
     });
@@ -121,6 +166,8 @@ function getApiKey() {
 	return 'AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw';
 }
 
+var category = "keyword_quotation";
+
 function onLoadGoogleClient() {
     gapi.client.setApiKey(getApiKey());
     
@@ -142,5 +189,19 @@ function onLoadGoogleClient() {
     $('#freebase_link').on('click', function() {
         _gaq.push(['_trackEvent', 'freebase-link', 'clicked']);
 	});
-
+    
+    $('.category').click(function() {
+    	selected = $(this).attr('id');
+        _gaq.push(['_trackEvent', selected, 'clicked']);
+        
+        if (selected != category) {
+        	$('#' + category).attr('class', 'category');
+        	$('#' + selected).attr('class', 'category selected');
+        	
+        	$('#' + category).parent().children(".icon-arrow-down-container").children(".icon-arrow-down").hide();
+        	$('#' + selected).parent().children(".icon-arrow-down-container").children(".icon-arrow-down").show();
+        	
+        	category = selected;
+        }
+    });
 }

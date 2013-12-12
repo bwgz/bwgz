@@ -6,13 +6,13 @@
 <meta name="description" content="Quotation brings you over 35000 random quotes from thousands of authors. Quotation showcases quotes from ancient times to present day. They are a stunning representation of those words that have influenced and molded our language and culture." />
 <meta name="author" content="bwgz.org">
 </head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/styles/style.css">
 <body>
 	<div id="header" class="header">
 		<table>
 			<tr>
 				<td>
-					<img src="19.png" align="left"></img>
+					<img src="/images/19.png" align="left"></img>
 				</td>
 				<td>
 					<strong><span style="font-size: 19px;">QUOTATION</span></strong>
@@ -29,12 +29,36 @@
         <form>
         	<table style="border-spacing: 0px; width: 80%;">
         		<tbody>
+         		<tr>
+        			<td style="padding-right: 0.2em">
+        			<div>
+	        			<div class="category_column">
+						    <a id="keyword_quotation" class="category selected">Keyword</a>
+						    <div class="icon-arrow-down-container">
+								<span class="icon-arrow-down"></span>
+						    </div>
+						</div>
+	        			<div class="category_column">
+						    <a id="author_quotation" class="category">Author</a>
+						    <div class="icon-arrow-down-container">
+								<span class="icon-arrow-down" style="display:none;"></span>
+						    </div>
+						</div>
+	        			<div class="category_column">
+						    <a id="subject_quotation" class="category">Subject</a>
+						    <div class="icon-arrow-down-container">
+								<span class="icon-arrow-down" style="display:none;"></span>
+						    </div>
+						</div>
+					</div>
+         			</td>
+        		</tr>
         		<tr>
         			<td style="margin: 0px; padding: 0px;">
  						<input type="search" id="query-field" style="margin: 0px; padding: 5px 3px 3px 7px; width: 100%; font-size: 15px;" autofocus/>
         			</td>
          			<td style="margin: 0px; padding: 0px; background-color: RoyalBlue;" align="center">
-						<input type="image" src="search.png" alt="Search" />
+						<input type="image" src="/images/search.png" alt="Search" />
         			</td>
         		</tr>
         		</tbody>
@@ -66,13 +90,13 @@
 			</div>
 			<div class="links">
 				<span class="footer-item">&copy; 2013 <a id="bwgz_link" href="http://www.bwgz.org" target="_blank">bwgz.org</a>.</span> | 
-				<span class="footer-item">Quotations provided by <a id="freebase_link" href="https://www.freebase.com/media_common/quotation?instances=" target="_blank"><img src="Freebase-logo.png" height="8"></img></a>.</span>
+				<span class="footer-item">Quotations provided by <a id="freebase_link" href="https://www.freebase.com/media_common/quotation?instances=" target="_blank"><img src="/images/Freebase-logo.png" height="8"></img></a>.</span>
 			</div>
 		</div>
 	</div>
-	<script src="analytics.js"></script>
+	<script src="/scripts/analytics.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="search.js"></script>
+	<script src="/scripts/search.js"></script>
 	<script src="https://apis.google.com/js/client.js?onload=onLoadGoogleClient"></script>
 </body>
 </html>

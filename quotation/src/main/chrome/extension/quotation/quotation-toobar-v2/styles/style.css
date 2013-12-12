@@ -1,0 +1,156 @@
+body {
+	font-family: "Montserrat", Arial, sans-serif;
+	background: #fff;
+	background-clip: padding-box;
+	font-size: 13px;
+	min-width: 30em;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+.header {
+	padding: 3px;
+	background-color: #f8f8f8;
+	border-bottom: solid 1px #ccc;
+}
+
+.footer {
+	margin-top: 10px;
+	padding-top: 5px;
+	border-top: 1px solid #e5e3e3;
+	font-size: 11px;
+}
+
+.footer-item {
+	padding: 0px 3px 0px 3px;
+}
+
+.links {
+	padding-top: 3px;
+	white-space: nowrap;
+    text-align: center;
+}
+
+.links, .links a, .links a:link, .links a:visited {
+	color: #999;
+}
+
+a, a:link, a:visited {
+	text-decoration: none;
+}
+
+.links a:hover {
+	color: #5184d2;
+}
+
+#content {
+	margin: 10px;
+}
+
+.result {
+	margin: 10px;
+}
+
+#previous:hover, #next:hover {
+	cursor: pointer;	
+}
+
+.step {
+	text-decoration:underline;
+	color:blue;
+}
+
+.current {
+	padding:3px;
+	font-weight:bold;
+}
+
+.page {
+	padding:3px;
+	color:blue;
+}
+
+.page:hover {
+	text-decoration: underline;
+	cursor: pointer;	
+}
+
+#search-results {border:1px solid #ccc;margin-top:5px;overflow-x:hidden;overflow-y:visible;text-overflow:ellipsis}
+
+input[type=search], input[type=search]:focus {
+    border: 1px solid RoyalBlue;
+	outline: none;
+}
+
+.category_column {
+	vertical-align: top;
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.category {
+	color: rgb(60, 147, 234);
+	padding: 4px 6px 4px 6px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: auto;
+	display: inline-block;
+}
+
+.category:hover {
+	color: #62c3ee;
+	cursor: pointer;	
+}
+
+.selected {
+	color: white;
+	background-color: #2F85E0;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	color: #fff;
+}
+
+.selected:hover {
+	color: white;
+}
+
+.icon-arrow-down-container {
+	color: #2F85E0;
+	margin-top: -0.3em;
+	background: none;
+    text-align: center;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('/fonts/icomoon.eot');
+	src:url('/fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/icomoon.ttf') format('truetype'),
+		url('/fonts/icomoon.woff') format('woff'),
+		url('/fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-down:before {
+	content: "\e601";
+}
+
