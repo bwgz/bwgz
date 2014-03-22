@@ -1,0 +1,135 @@
+.gloader {
+  display:inline-block; position:relative;
+  width:19px; height:19px;
+  font-size:0px;
+  float:right;
+}
+ 
+.gloader:before,
+.gloader:after,
+.gloader > * {
+  content:' '; display:block; width:50%; height:100%;
+  position:absolute; top:0px; left:0px; z-index:1;
+  background:#21aa29; border-radius:25px 0px 0px 25px;
+}
+ 
+.gloader:after {
+  left:auto; right:0px;
+  background:#21aa29; border-radius:0px 25px 25px 0px;
+}
+ 
+.gloader > * {
+  position:absolute; top:0px; left:auto; right:0px; z-index:3;
+  background:#21aa29; border-radius:0px 25px 25px 0px;
+  -webkit-transform-style:preserve-3d;
+  -webkit-transform-origin:0px 50%;
+  -webkit-transition:all 0.33s 0s linear;
+}
+ 
+/* Generic Timing */
+.gloader[data-state] > *,
+.gloader[data-state$=".5"] > *{
+  z-index:10;
+  -webkit-transition-duration:0.0000001s;
+  -webkit-transition-timing-function:linear;
+  -webkit-transform:rotateY(0deg);
+}
+.gloader[data-state$=".5"] > * {
+  -webkit-transform:rotateY(-90deg);
+}
+.gloader[data-state$=".25"] > *,
+.gloader[data-state$=".75"] > * {
+  z-index:11;
+  -webkit-transition-duration:0.33s;
+  -webkit-transition-timing-function:ease-in;
+  -webkit-transform:rotateY(-90deg);
+}
+.gloader[data-state$=".75"] > * {
+  -webkit-transition-timing-function:ease-out;
+  -webkit-transform:rotateY(-180deg);
+}
+ 
+/* Rotation - not animated */
+.gloader[data-state^="0"],
+.gloader[data-state^="2"] {
+  -webkit-transform:rotate(0deg);
+}
+.gloader[data-state^="1"],
+.gloader[data-state^="3"] {
+  -webkit-transform:rotate(-90deg);
+}
+ 
+/*
+  Google Colors (Green -> Blue -> Red -> Yellow...):
+  Green:  #21aa29 / #105514
+  Blue:   #2159d6 / #102c6b
+  Red:    #d62408 / #6b1204
+  Yellow: #ffcf00 / #7f6700
+*/
+/* Green -> Blue */
+.gloader[data-state="0.75"] > *,
+.gloader[data-state^="0"]:after {
+  background:#2159d6; /* Final */
+}
+.gloader[data-state="0"] > *,
+.gloader[data-state^="0"]:before,
+.gloader[data-state="0"]:after {
+  background:#21aa29; /* Start */
+}
+.gloader[data-state="0.25"] > * {
+  background:#105514; /* Start Middle */
+}
+.gloader[data-state="0.5"] > * {
+  background:#102c6b; /* End Middle */
+}
+ 
+/* Blue -> Red */
+.gloader[data-state="1.75"] > *,
+.gloader[data-state^="1"]:after {
+  background:#d62408; /* Final */
+}
+.gloader[data-state="1"] > *,
+.gloader[data-state^="1"]:before,
+.gloader[data-state="1"]:after {
+  background:#2159d6; /* Start */
+}
+.gloader[data-state="1.25"] > * {
+  background:#102c6b; /* Start Middle */
+}
+.gloader[data-state="1.5"] > * {
+  background:#6b1204; /* End Middle */
+}
+ 
+/* Red -> Yellow */
+.gloader[data-state="2.75"] > *,
+.gloader[data-state^="2"]:after {
+  background:#ffcf00; /* Final */
+}
+.gloader[data-state="2"] > *,
+.gloader[data-state^="2"]:before,
+.gloader[data-state="2"]:after {
+  background:#d62408; /* Start */
+}
+.gloader[data-state="2.25"] > * {
+  background:#6b1204; /* Start Middle */
+}
+.gloader[data-state="2.5"] > * {
+  background:#7f6700; /* End Middle */
+}
+ 
+/* Yellow -> Green */
+.gloader[data-state="3.75"] > *,
+.gloader[data-state^="3"]:after {
+  background:#21aa29; /* Final */
+}
+.gloader[data-state="3"] > *,
+.gloader[data-state^="3"]:before,
+.gloader[data-state="3"]:after {
+  background:#ffcf00; /* Start */
+}
+.gloader[data-state="3.25"] > * {
+  background:#7f6700; /* Start Middle */
+}
+.gloader[data-state="3.5"] > * {
+  background:#105514; /* End Middle */
+}

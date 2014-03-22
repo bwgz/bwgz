@@ -1,0 +1,86 @@
+
+<div>
+	<div class="row">
+		<div class="col-lg-12">
+			<blockquote>
+				<h2>{{quotation.quotation}}</h2>
+				<span ng-show="quotation.authors">
+					<span ng-repeat="author in quotation.authors">
+						<a href="#/author{{author.id}}">{{author.name}}</a>
+						<span ng-show="author.notableFor">
+							{{author.notableFor}}
+						</span>
+						<br/>
+					</span>
+				</span>
+			</blockquote>
+		</div>
+		<div class="col-lg-12">
+			<div ng-show="quotation.spokenByCharacter">
+				<strong>Spoken By: </strong>{{quotation.spokenByCharacter}}<br/>
+			</div>
+			<div ng-show="quotation.source">
+				<span><strong>Source: </strong>{{quotation.source.name}}</span> <span ng-show="quotation.source.type">({{quotation.source.type}})</span><br/>
+			</div>
+		</div>
+		<div class="col-lg-12 button-bar">
+			<a href="https://twitter.com/intent/tweet?text={{quotation.quotation}} http://quotation.bwgz.org/quotation{{quotation.id}}" target="_blank">
+				<img src="/images/twitter16x16.png" alt="Share on Twitter"></a>
+
+			
+			<span id="gplus-share" class="plus g-interactivepost"
+			    data-calltoactionlabel="OPEN"
+			    data-calltoactionurl="http://quotation.bwgz.org/quotation{{quotation.id}}"
+			    data-clientid="848640002630-vgap1rvadjan9hv51j0r8phatdsv4kt9.apps.googleusercontent.com"
+			    data-contenturl="http://quotation.bwgz.org"
+			    data-cookiepolicy="single_host_origin"
+				data-prefilltext="{{quotation.quotation}}">
+ 				<span class="icon">&nbsp;</span>
+			</span>
+			
+<!--  
+			<a href="https://plus.google.com/share?url=http://quotation.bwgz.org/quotation{{quotation.id}}">
+				<img src="https://www.gstatic.com/images/icons/gplus-16.png" alt="Share on Google+"></a>			
+-->
+
+			<a href="https://www.facebook.com/sharer/sharer.php?u=http://quotation.bwgz.org/quotation/m/0b6ykz7&amp;h1=en_US">
+				<img id="facebook_image" src="/images/FB-f-Logo__blue_16.png" alt="Share on Facebook"></a>
+
+			<span style="float: right;">
+ 				<a href="#/quotation{{refresh}}""><img id="refresh_image" src="/images/refresh16x16.png" alt="Refresh"></a>
+			</span>
+		</div>
+		<div class="col-lg-12 button-bar">
+			<span style="float: right;">
+				<a id="freebase_link" href="http://freebase.com{{quotation.id}}" target="_blank"><img src="http://www.gstatic.com/freebase/img/freebase-cc-by-61x23.png"alt="Freebase Creative Commons" /></a>
+			</span>
+		</div>
+	</div>
+</div>
+
+<div ng-show="quotation.subjects">
+	<div class="row">
+		<div class="col-lg-12">
+			<h2>Related Subjects</h2>
+		</div>
+		<div class="col-lg-4" ng-repeat="subject in quotation.subjects">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4><a href="#/subject{{subject.id}}">{{subject.name}}</a></h4>
+				</div>
+				<div class="panel-body">{{subject.description.text}}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-show="!quotation.subjects">
+	<div class="row">
+		<div class="col-lg-12">
+			<p>&nbsp;</p>
+		</div>
+	</div>
+</div>
+
+        
+

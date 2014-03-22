@@ -1,9 +1,11 @@
-var selected = 'keyword_quotation';
+var last_type_selected;
+
+var type = 'keyword';
 var query;
-var index = 0;
-var length = 0;
-var max = 0;
-var step = 8;
+var page = 0;			// current page (base 0)
+var length = 0;			// number of results on current page
+var hits = 0;			// total number of results the search found
+var rpp = 8;			// results per page
 
 function updateAuthor(mid, id) {
     request = gapi.client.request({
@@ -27,47 +29,57 @@ function updateAuthor(mid, id) {
     });
 }
 
-function page(cursor, limit) {
+function getParams(value, query, cursor, limit) {
 	var params;
-	
-	if (selected == 'keyword_quotation') {
+
+	switch (value) {
+	case 'keyword':
 		params = {
     		'query':  query,
     		'filter': '(any type:/media_common/quotation)',
     		'cursor': cursor,
     		'limit':  limit
 		};
-	}
-	else if (selected == 'author_quotation') {
+		break;
+	case 'author':
 		params = {
     		'filter': '(all type:/media_common/quotation /media_common/quotation/author:"' + query + '")',
     		'cursor': cursor,
     		'limit':  limit
 		};
-	}
-	else if (selected == 'subject_quotation') {
+		break;
+	case 'subject':
 		params = {
     		'filter': '(all type:/media_common/quotation /media_common/quotation/subjects:"' + query + '")',
     		'cursor': cursor,
     		'limit':  limit
 		};
+		break;
 	}
+	
+	return params;
+}
+
+function doPage(number) {
+	page = number;
+	length = 0;
+	hits = 0;
+	
+	var cursor = page * rpp;
 	
     request = gapi.client.request({
     	'path': '/freebase/v1/search',
-    	'params': params
+    	'params': getParams(type, query, cursor, rpp)
     });
 	request.execute(function(json) {
 		if (json.error != undefined) {
 			
 		}
 		else {
-			max = Math.min(200, json.hits);
-		
-			index = cursor;
+			hits = Math.min(200, json.hits);
 			length = json.result.length;
 			
-			if (index == 0 && length == 0) {
+			if (page == 0 && length == 0) {
 				$("#not-found").show();
 				$("#search-results").hide();
 			}
@@ -93,14 +105,14 @@ function page(cursor, limit) {
 			}
 		}
 		
-		if (index == 0) {
+		if (page == 0) {
 			$("#previous").hide();
 		}
 		else {
 			$("#previous").show();
 		}
 		
-		if (length != limit || index + length >= max) {
+		if (length != rpp || (page * rpp) + length == hits) {
 			$("#next").hide();
 		}
 		else {
@@ -108,46 +120,43 @@ function page(cursor, limit) {
 		}
 		
 		$("#pages").html('');
-		var current = Math.ceil((index + length) / step);
-		var pages = Math.ceil(max / step);
-		var start = (current <= 6 || pages <= 10) ? 0 : Math.min(current - 6, pages - 10);
-		var end = Math.min(Math.max(current + 4, 10), pages);
+		var pages = Math.ceil(hits / rpp);
+		var start = (page < 5 || pages < 10) ? 0 : Math.min(page - 5, pages - 10);
+		var end = Math.min(start + 10, pages);
+		
 		var string = "";
 		for (var i = start; i < end; i++) {
-			if (i + 1 == current) {
+			if (i == page) {
 				string += '<span class="current">' + (i + 1) + '</span>';
 			}
 			else {
-				string += '<span class="page" data-index="' + (i * 10) + '">' + (i + 1) + '</span>';
+				string += '<span class="page" data-page="' + i + '">' + (i + 1) + '</span>';
 			}
 		}
 		$("#pages").append(string);
 	    $('.page').click(function() {
-	        page(parseInt($(this).attr('data-index')), step);
+	        doPage(parseInt($(this).attr('data-page')));
 	        _gaq.push(['_trackEvent', 'page', 'clicked', query]);
 	    });
     });
 }
 
 function search(event) {
-	index = 0;
-	length = 0;
-	max = 0;
 	query = $('#query-field').val();
 	
-	page(index, step);
+	doPage(0);
     _gaq.push(['_trackEvent', 'search', 'clicked', query]);
 
 	return false;
 }
 
 function previous() {
-	page(index - step, step);
+	doPage(page - 1);
     _gaq.push(['_trackEvent', 'previous', 'clicked', query]);
 }
 
 function next() {
-	page(index + length, step);
+	doPage(page + 1);
     _gaq.push(['_trackEvent', 'next', 'clicked', query]);
 }
 
@@ -155,21 +164,61 @@ function pasteSelection() {
 	chrome.tabs.query({active:true, currentWindow: true}, function(tab) {
 		chrome.tabs.sendMessage(tab[0].id, {method: "getSelection"}, function(response) {
 			if (response != undefined && response.data != undefined) {
-				$('#query-field').val(response.data);
-			    _gaq.push(['_trackEvent', 'selection', response.data]);
+				var data = response.data.trim();
+				
+				if (data.length != 0) {
+					$('#query-field').val(data);
+				    search(null);
+				    _gaq.push(['_trackEvent', 'selection', data]);
+				}
 			}
 		});
 	});
+}
+
+function restoreOptions() {
+	var value = localStorage["search_type"];
+	if (value) {
+		type = value;
+	}
+	
+	var value = localStorage["results_per_page"];
+	if (value) {
+		rpp = value;
+	}
+}
+
+function setupSearchType() {
+	var selected;
+	
+	switch (type)
+	{
+	case "keyword":
+		selected = "search_type_keyword";
+		break;
+	case "author":
+		selected = "search_type_author";
+		break;
+	case "subject": 
+		selected = "search_type_subject";
+		break;
+	}
+	
+	$('#' + selected).attr('class', 'category selected');
+	$('#' + selected).parent().children(".icon-arrow-down-container").children(".icon-arrow-down").show();
+	
+	last_type_selected = selected;
 }
 
 function getApiKey() {
 	return 'AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw';
 }
 
-var category = "keyword_quotation";
-
 function onLoadGoogleClient() {
     gapi.client.setApiKey(getApiKey());
+    
+    restoreOptions();
+    setupSearchType();
     
 	pasteSelection();
 
@@ -191,17 +240,19 @@ function onLoadGoogleClient() {
 	});
     
     $('.category').click(function() {
-    	selected = $(this).attr('id');
+    	var selected = $(this).attr('id');
         _gaq.push(['_trackEvent', selected, 'clicked']);
         
-        if (selected != category) {
-        	$('#' + category).attr('class', 'category');
-        	$('#' + selected).attr('class', 'category selected');
+        if (selected != last_type_selected) {
+        	$('#' + last_type_selected).attr('class', 'category');
+        	$('#' + last_type_selected).parent().children(".icon-arrow-down-container").children(".icon-arrow-down").hide();
         	
-        	$('#' + category).parent().children(".icon-arrow-down-container").children(".icon-arrow-down").hide();
+        	$('#' + selected).attr('class', 'category selected');
         	$('#' + selected).parent().children(".icon-arrow-down-container").children(".icon-arrow-down").show();
         	
-        	category = selected;
+        	type = $(this).attr('data-type');
+        	last_type_selected = selected;
         }
     });
+    
 }

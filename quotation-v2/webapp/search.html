@@ -1,0 +1,14 @@
+<div>
+	<div class="col-lg-12">
+		<div class="row" style="background-color: white;">
+			<hr/>
+			<table ng-table="tableParams">
+				<tr ng-repeat="result in $data">
+					<td>
+						<blockquote><em>{{result.name}}</em> <a href="#/quotation{{result.mid}}"><img src="/images/quotation16x16.png" border="0"></a></blockquote>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

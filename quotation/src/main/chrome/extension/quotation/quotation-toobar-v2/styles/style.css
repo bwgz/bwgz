@@ -76,7 +76,7 @@ a, a:link, a:visited {
 	cursor: pointer;	
 }
 
-#search-results {border:1px solid #ccc;margin-top:5px;overflow-x:hidden;overflow-y:visible;text-overflow:ellipsis}
+#search-results {margin-top:5px;overflow-x:hidden;overflow-y:visible;text-overflow:ellipsis}
 
 input[type=search], input[type=search]:focus {
     border: 1px solid RoyalBlue;
@@ -123,6 +123,12 @@ input[type=search], input[type=search]:focus {
 	margin-top: -0.3em;
 	background: none;
     text-align: center;
+}
+
+.goog-flat-menu-button-img {
+	opacity: .55;
+	vertical-align: middle;
+	text-align: right;
 }
 
 @font-face {

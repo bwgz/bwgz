@@ -1,0 +1,20 @@
+  #gplus-share.plus {
+	vertical-align: middle;
+    cursor: pointer;
+    line-height: 16px;
+  }
+  
+  #gplus-share.plus .icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url('https://www.gstatic.com/images/icons/gplus-16.png') transparent 0 0px no-repeat;
+  }
+  
+  #gplus-share.plus:hover {
+  }
+  
+  #gplus-share.plus:hover .icon {
+    background: url('https://www.gstatic.com/images/icons/gplus-16.png') transparent 0 0px no-repeat;
+  }
+

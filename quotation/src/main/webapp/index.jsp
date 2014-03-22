@@ -82,7 +82,6 @@ img.displayed {margin-right: 5px; }
 
 <script src="//apis.google.com/js/client.js?onload=onLoadGoogleClient"></script>
 <script src="//maps.google.com/maps/api/js?key=AIzaSyAXwb8gGqL5QfOLAmKyT7vF3OHEtiaV-Nw&sensor=false"></script>
-<script src="//apis.google.com/js/plusone.js"></script>
 
 <link href="/jsImgSlider/1/js-image-slider.css" rel="stylesheet" type="text/css" />
 <script src="/jsImgSlider/1/js-image-slider.js" type="text/javascript"></script>
@@ -102,6 +101,14 @@ img.displayed {margin-right: 5px; }
 		localeDatePattern = localeDatePattern.replace("yy", "yyyy");
 	}
 </script>
+<script type="text/javascript">
+  (function() {
+   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/client:plusone.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+ })();
+</script>
+
 <div id="fb-root"></div>
 <script>
 (function(d, s, id) {
@@ -161,6 +168,10 @@ img.displayed {margin-right: 5px; }
 			-->
 		</div>
 		<nav>
+			<div>
+				<label for="mysearch2">Enter your search string here : </label> 
+				<input id="mysearch2" type="search" placeholder="search">
+			</div>
 			<ul>
 				<li><button id="workPage"><fmt:message key="home" bundle="${msg}"/></button></li>
 				<li><button id="aboutPage"><fmt:message key="mobile" bundle="${msg}"/></button></li>
