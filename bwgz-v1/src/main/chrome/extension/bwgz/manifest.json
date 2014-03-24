@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "bwgz.org",
+  "version": "1",
+  "app": {
+    "launch": {
+      "web_url": "http://www.bwgz.org"
+    }
+  },
+  "icons": {
+   "16": "16.png",
+   "48": "48.png",
+   "128": "128.png"
+  }
+}
