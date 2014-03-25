@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="The portfolio of Bruce Green">
+<meta name="author" content="Bruce Green">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<title>Bruce Green &dash; Open Source</title>
+
+<!-- Favicons -->
+<link rel="shortcut icon" href="images/favicons/bwgz16x16.png">
+<link rel="apple-touch-icon" href="images/favicons/bwgz57x57.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/favicons/bwgz72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/favicons/bwgz114x114.png">
+
+<!-- css -->
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="css/flexslider.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+
+<!-- Theme skin -->
+<link href="skins/default.css" rel="stylesheet" />
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+<body>
+<div id="wrapper">
+	<!-- start header -->
+	<header>
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Bruce Green<span> Software Engineer</span></a>
+                </div>
+                <div class="navbar-collapse collapse ">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active dropdown">
+                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Projects<b class=" icon-angle-down"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="quotation.html">Quotation</a></li>
+                                <li><a href="open.html">Open Source</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	</header>
+	<!-- end header -->
+	<section id="inner-headline">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<ul class="breadcrumb">
+					<li><a href="index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+					<li>Projects</li>
+					<li class="active">Quotation</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</section>
+
+	<section id="content">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<hr/>
+				<h3>Cling OSGi UPnP Device Service</h3>
+			</div>
+			<div class="col-lg-3">
+				<img src="images/open/cling/cling.jpg">
+			</div>
+			<div class="col-lg-9">
+			<p>
+			<a href="http://4thline.org/projects/cling/" target="_blank">Cling</a> is a UPnP-compatible software stack for Java environments. UPnP (Universal Plug and Play) is a set of networking protocols that permits networked devices, such as personal computers, printers, Internet gateways, Wi-Fi access points and mobile devices to seamlessly discover each other's presence on the network and establish functional network services for data sharing, communications, and entertainment. UPnP is intended primarily for residential networks without enterprise-class devices.
+			</p>
+			<p>
+			The Cling OSGi UPnP Device Service is an implementation of the OSGi UPnP Device Service specification version 1.1. This OSGi specifications address how code can be run and managed in a remote system.
+			</p>
+			<p>
+			The Cling UPnP Service includes UPnP network listeners, background
+			maintenance threads, etc. Cling accepts a custom RegistryListener
+			instance which is notified of all incoming device and service
+			registrations as soon as the network stack is ready. Using a
+			Cling RegistryListener the base driver can observe the discovery
+			of devices and then register them with the OSGi framework.
+			</p>
+			<p>
+			An OSGi bundle exposes its UPnP device 
+			services by registering them with the OSGi 
+			framework. Using an OSGi framework 
+			ServiceTracker the base driver can observe 
+			the registration of these services and then 
+			present them externally using Cling’s UPnP 
+			Service.
+			</p>
+			<hr>
+			<ul class="unstyled">
+				<li><strong>Role: </strong>Architect, Software Engineer</li>
+				<li><strong>Year: </strong>2011-2012</li>
+				<li><strong>Source: </strong>Available at <a href="https://github.com/4thline/cling" target="_blank"><strong>GitHub</strong></a></li>
+				<li><strong>License: </strong><a class="externalLink" href="http://www.gnu.org/licenses/lgpl-2.1.html" target="_blank"><img alt="Creative Commons License" align="middle"  width="40" src="images/license/lgplv3-88x31.png" /> LGPL</a>, <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank"><img alt="Creative Commons License" align="middle" src="http://i.creativecommons.org/l/by-sa/4.0/80x15.png" /> CDDL</a></li>
+			</ul>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<hr/>
+				<h3>Eclipse Icon Archive Tool</h3>
+			</div>
+			<div class="col-lg-8">
+			<a href="https://marketplace.eclipse.org/content/eclipse-icon-archive-tool" target="_blank">Eclipse Icon Archive Tool</a>
+			provides quick access to thousands of Eclipse icons. Browse and search tools make
+			finding icons quick and easy. The export feature lets you save icons for use in your own projects.
+			<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=35808" title="Drag and drop into a running Eclipse Indigo workspace to install Eclipse Icon Archive Tool">
+			<img src="https://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"/></a>
+			<hr>
+			<ul class="unstyled">
+				<li><strong>Role: </strong>Architect, Software Engineer</li>
+				<li><strong>Year: </strong>2011</li>
+				<li><strong>Source: </strong>Available at <a href="https://code.google.com/p/bwgz-org/" target="_blank"><strong>Google Code</strong></a></li>
+				<li><strong>License: </strong><a href="http://www.eclipse.org/legal/epl-v10.html" target="_blank"><img alt="Creative Commons License" align="middle" width="60" src="images/license/eclipse-800x426.png" /> EPL</a></li>
+			</ul>
+			</div>
+			<div class="col-lg-4">
+				<img src="images/license/eclipse-800x426.png">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<hr/>
+				<h3>noip4aws</h3>
+			</div>
+			<div class="col-lg-4">
+				<img src="images/open/noip4aws/noip4aws.png">
+			</div>
+			<div class="col-lg-8">
+			<p>
+			<a href="https://code.google.com/p/noip4aws" target="_blank">noip4aws</a> is a No-IP DNS update client that regularly checks for public IP address changes to an Amazon EC2 instance and automatically updates the DNS at No-IP on a regular time interval.
+			</p>
+			<hr>
+			<ul class="unstyled">
+				<li><strong>Role: </strong>Architect, Software Engineer</li>
+				<li><strong>Year: </strong>2010</li>
+				<li><strong>Source: </strong>Available at <a href="https://code.google.com/p/noip4aws/" target="_blank"><strong>Google Code</strong></a></li>
+				<li><strong>License: </strong><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank"><img alt="Creative Commons License" align="middle"  width="40" src="images/license/feather-small.gif" /> APL</a></li>
+			</ul>
+			</div>
+		</div>
+
+		<!-- divider -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="solidline"></div>
+			</div>
+		</div>
+		<!-- end divider -->
+
+	</div>
+	</section>
+	<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3">
+				<div class="widget">
+					<h5 class="widgetheading">Bruce Green</h5>
+					<p>
+						<i class="fa fa-envelope"></i> <a href="mailto:bruce@bwgz.org">bruce@bwgz.org</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="sub-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="copyright">
+						<p>
+							<span>&copy; bwgz.org 2014</span>
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+				</div>
+			</div>
+		</div>
+	</div>
+	</footer>
+</div>
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+<!-- javascript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.fancybox.pack.js"></script>
+<script src="js/jquery.fancybox-media.js"></script>
+<script src="js/google-code-prettify/prettify.js"></script>
+<script src="js/portfolio/jquery.quicksand.js"></script>
+<script src="js/portfolio/setting.js"></script>
+<script src="js/jquery.flexslider.js"></script>
+<script src="js/animate.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>
